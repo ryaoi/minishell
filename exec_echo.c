@@ -4,18 +4,13 @@
 static void		print_env(char *str, t_env *env)
 {
 	t_env		*ptr;
-	char		*put;
 
 	ptr = env;
 	while (ptr != NULL)
 	{
-        if (ft_strncmp(str, ptr->name, ft_strlen(str)) == 0)
+        if (ft_strcmp(str, ptr->name) == 0)
 		{
-//			printf("trunc this:%s\n", ptr->name);
-			put = ft_strsub(ptr->name, ft_strlen(str) + 1, ft_strlen(ptr->name));
-//			printf("end with:%zu\n", ft_strlen(ptr->name));
-            ft_putstr(put);
-			ft_strdel(&put);
+            ft_putstr(ptr->data);
 			return ;
 		}
         ptr = ptr->next;
@@ -29,7 +24,7 @@ int				search_env(char *str, t_env *env)
 	ptr = env;
 	while (ptr != NULL)
 	{
-		if (ft_strncmp(str, ptr->name, ft_strlen(str)) == 0)
+		if (ft_strcmp(str, ptr->name) == 0)
 			return (1);
 		ptr = ptr->next;
 	}
@@ -57,13 +52,20 @@ static int		ft_putenv(char *str, t_msh *msh, int j)
 
 void			sub_echo(char **cmds, int *i, int *j, int *max)
 {
-	char		*str;
+	int			k;
 
+	k = 1;
 	if (cmds[*i][0] == '\'')
 	{
-		str = ft_strsub(cmds[*i], 1, ft_strlen(cmds[*i]) - 2);
-		ft_putstr(str);
-		ft_strdel(&str);
+		while (cmds[*i][k] != '\0')
+		{
+			if ((cmds[*i][k] == '\"' && cmds[*i][k - 1] == '\\')
+				|| (cmds[*i][k] == '\'' && cmds[*i][k - 1] == '\\'))
+				ft_putchar(cmds[*i][k]);
+			else if (cmds[*i][k] != '\\' && cmds[*i][k] != '\'')
+				ft_putchar(cmds[*i][k]);
+			k++;
+		}
 	}
 	else if (cmds[*i][0] == '\"')
 	{
@@ -99,4 +101,5 @@ void			exec_echo(char **cmds, t_msh *msh)
 		if (cmds[i] != 0)
 			ft_putchar(' ');
 	}
+	ft_putchar('\n');
 }

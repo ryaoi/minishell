@@ -1,15 +1,31 @@
 
 #include "minishell.h"
-
+static void		init_pwd(t_msh **msh, char **envp)
+{
+	int			i;
+	
+	i = 0;
+	while (envp[i] != 0)
+	{
+		if (ft_strncmp("PWD", envp[i], 3) == 0)
+			(*msh)->pwd = ft_strsub(envp[i], 4, ft_strlen(envp[i]));
+		if (ft_strncmp("HOME", envp[i], 4) == 0)
+			(*msh)->home = ft_strsub(envp[i], 5, ft_strlen(envp[i]));
+		i++;
+	}
+}
 static void		add_env(t_env **head, char *str)
 {
 	t_env		*ptr;
 	t_env		*new;
+	char		**tmp;
 
+	tmp = ft_strsplit(str, '=');
 	if (!(new = (t_env *)malloc(sizeof(t_env))))
 		exit(EXIT_FAILURE);
-	new->name = ft_strdup(str);
-//	printf("name:%s\n", new->name);
+	new->name = ft_strdup(tmp[0]);
+	new->data = ft_strdup(tmp[1]);
+	freecmds(tmp);
 	new->next = NULL;
 	if ((*head) == NULL)
 	{
@@ -69,4 +85,5 @@ void			init_msh(t_msh **msh, char **envp)
 	(*msh)->env = NULL;
 	init_env(msh, envp);
 	init_bin_dir(msh, envp);
+	init_pwd(msh, envp);
 }

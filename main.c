@@ -8,11 +8,13 @@ void		exec_msh(t_msh **msh, char *line, char **cmds)
 
 	while (42)
 	{
-		ret = get_next_line(0, &line);
-		if (ret && *line != '\n')
+		ret = read_stdin(&line);
+//		printf("ret is:%d\n", ret);
+		if (ret)
 		{
-//			printf("line is:%s\n", line);
 			cmds = ft_strsplit(line, ' ');
+			free(line);
+//			printf("cmds[0] is:%s and ft_strlenis:%zu\n", cmds[0], ft_strlen(cmds[0]));
 			if (select_cmd(cmds[0], *msh) == 1)
 				exec_cmd(cmds, msh);
 //			else
@@ -23,9 +25,9 @@ void		exec_msh(t_msh **msh, char *line, char **cmds)
 //			}
 //			freecmds(&cmds);
 		}
-		free(line);
+//		free(line);
 //		wait(&pid);
-		ft_putstr("\n$>");
+		ft_putstr("$>");
 	}
 }
 
