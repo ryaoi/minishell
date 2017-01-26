@@ -9,7 +9,6 @@ void		exec_msh(t_msh **msh, char *line, char **cmds)
 	while (42)
 	{
 		ret = read_stdin(&line);
-//		printf("ret is:%d\n", ret);
 		if (ret)
 		{
 			cmds = ft_strsplit(line, ' ');
