@@ -23,9 +23,8 @@ void		exec_msh(t_msh **msh, char *line, char **cmds)
 //				if (pid == 0)
 //					exec_bin(cmds, *msh);
 //			}
-//			freecmds(&cmds);
+			freecmds(cmds);
 		}
-//		free(line);
 //		wait(&pid);
 		ft_putstr("$>");
 	}

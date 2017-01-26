@@ -6,7 +6,6 @@ void			exec_unsetenv(char **cmds, t_msh **msh)
 	t_env		*ptr;
 	t_env		*prev;
 
-	printf("unsetenv\n");
 	ptr = (*msh)->env;
 	prev = ptr;
 	while (ptr != NULL)
@@ -15,6 +14,7 @@ void			exec_unsetenv(char **cmds, t_msh **msh)
 		{
 			prev->next = ptr->next;
 			free(ptr->name);
+			free(ptr->data);
 			free(ptr);
 			return ;
 		}
