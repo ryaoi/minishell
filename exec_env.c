@@ -28,7 +28,6 @@ static void		modify_cmds(char *str, t_msh *msh)
 	t_env		*ptr;
 	char		*name;
 
-	printf("modify cmds\n");
 	name = ft_strsub(str, 1, ft_strlen(str));
 	if (search_env(name, msh->env) == 0)
 	{

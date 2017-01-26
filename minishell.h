@@ -41,5 +41,8 @@ void				freeenv(t_env **env);
 void				freecmds(char **cmds);
 void				modif_env(char *name, char *new_ddata, t_msh **msh);
 void				set_env(char *name, char *data, t_msh **msh);
+char				*get_data(char *name, t_env *env);
+char				*get_str_env(char *str, int size, t_msh **msh, int i);
+int					check_env_name(char *str, int i, t_env *env);
 
 #endif
