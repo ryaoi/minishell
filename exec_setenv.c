@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 18:27:28 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/26 20:57:14 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/27 18:59:04 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		all_cap(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (ft_isalpha(str[i]) == 0)
+		if (str[i] >= 'A' && str[i] <= 'Z')
 			return (1);
 		i++;
 	}
@@ -80,7 +80,6 @@ static char		*replace_env(char *str, t_msh **msh)
 			size++;
 		}
 	}
-	printf("gonna finish replace_env with size:%d\n", size);
 	return (get_str_env(str, size, msh, 1));
 }
 

@@ -1,22 +1,12 @@
 
 #include "minishell.h"
 
-static int			cd_access(char *path)
+void				cd_home(char **cmds, t_msh **msh)
 {
 	struct stat		fs;
 
-	lstat(path, &fs);
-	if (access(path, F_OK) != 0)
-	{
-		ft_printf("cd : %s: No such file or directory\n", path);
-		return (0);
-	}
-	return (1);
-}
-
-void				cd_home(char **cmds, t_msh **msh)
-{
-	if (cd_access((*msh)->home) == 1)
+	lstat((*msh)->home, &fs);
+	if (check_directory((*msh)->home) == 0)
 	{
 		modif_env("OLDPWD", (*msh)->pwd, msh);
 		modif_env("PWD", (*msh)->home, msh);
@@ -26,7 +16,7 @@ void				cd_home(char **cmds, t_msh **msh)
 	}
 }
 
-void				cd_twodot(char **cmds, t_msh **msh)
+static void			cd_twodot(char **cmds, t_msh **msh)
 {
 	int		i;
 	char	*new;
@@ -42,15 +32,31 @@ void				cd_twodot(char **cmds, t_msh **msh)
 		new = ft_strsub((*msh)->pwd, 0, i);
 	else
 		new = ft_strdup("/");
-	if (cd_access(new) == 1)
+	if (check_directory(new) == 0)
 	{
 		modif_env("OLDPWD", (*msh)->pwd, msh);
 		modif_env("PWD", new, msh);
 		free((*msh)->pwd);
 		(*msh)->pwd = ft_strdup(new);
-		chdir((*msh)->pwd);
 	}
 	ft_strdel(&new);
+}
+
+static void			cd_files(char **cmds, t_msh **msh)
+{
+	char	*path;
+
+	path = NULL;
+	path = ft_strjoin((*msh)->pwd, "/");
+	path = ft_strjoini(path, cmds[1], 1);
+	if (check_file(path, cmds[1]) == 0)
+	{
+		modif_env("OLDPWD", (*msh)->pwd, msh);
+		free((*msh)->pwd);
+		modif_env("PWD", path, msh);
+		(*msh)->pwd = ft_strdup(path);
+	}
+	free(path);
 }
 
 void				exec_cd(char **cmds, t_msh **msh)
@@ -61,4 +67,8 @@ void				exec_cd(char **cmds, t_msh **msh)
 		modif_env("OLDPWD", (*msh)->pwd, msh);
 	else if (ft_strcmp(cmds[1], "..") == 0)
 		cd_twodot(cmds, msh);
+	else if (cmds[1][0] != '/')
+		cd_files(cmds, msh);
+//	else if (cmds[1][0] == '/')
+//		cd_dir(cmds, msh);
 }

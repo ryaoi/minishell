@@ -44,5 +44,7 @@ void				set_env(char *name, char *data, t_msh **msh);
 char				*get_data(char *name, t_env *env);
 char				*get_str_env(char *str, int size, t_msh **msh, int i);
 int					check_env_name(char *str, int i, t_env *env);
+int					check_file(char *path, char *file);
+int					check_directory(char *path);
 
 #endif
