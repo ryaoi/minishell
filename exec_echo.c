@@ -6,13 +6,13 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 18:28:05 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/26 18:35:17 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/28 21:25:35 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		print_env(char *str, t_env *env)
+void			print_env(char *str, t_env *env)
 {
 	t_env		*ptr;
 
@@ -65,9 +65,11 @@ void			sub_echo(char **cmds, int *i, int *j, int *max)
 {
 	int			k;
 
-	k = 1;
 	if (cmds[*i][0] == '\'')
 	{
+		k = 0;
+		if (*i == 1)
+			k++;
 		while (cmds[*i][k] != '\0')
 		{
 			if ((cmds[*i][k] == '\"' && cmds[*i][k - 1] == '\\')
@@ -95,22 +97,26 @@ void			exec_echo(char **cmds, t_msh *msh)
 	int			i;
 	int			j;
 	int			max;
+	char		*str;
 
 	i = 1;
-	while (cmds[i])
+	if (cmds[1] != NULL && cmds[1][0] == '\"')
 	{
-		sub_echo(cmds, &i, &j, &max);
-		while (j < max && cmds[i][0] != '\'')
-		{
-			if (cmds[i][j] == '$')
-				j = ft_putenv(cmds[i], msh, j) - 1;
-			else if (cmds[i][j] != '\"')
-				ft_putchar(cmds[i][j]);
-			j++;
-		}	
-		i++;
-		if (cmds[i] != 0)
-			ft_putchar(' ');
+		str = inspectquote(cmds, '\"');
+		print_doubledot(str, msh, 0, 0);
+	}
+	else if (cmds[1] != NULL && cmds[1][0] == '\'')
+	{
+		str = inspectquote(cmds, '\'');
+		ft_putstr(str);
+	}
+	else if (cmds[1] != NULL)
+	{
+		str = ft_strsub(cmds[1], 1, ft_strlen(cmds[1]));
+		if (ft_strchr(cmds[1], '$') == NULL)
+			ft_putstr(cmds[1]);
+		else if (search_env(str, msh->env) == 1)
+			print_env(str, msh->env);
 	}
 	ft_putchar('\n');
 }

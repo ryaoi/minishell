@@ -59,6 +59,21 @@ static void			cd_files(char **cmds, t_msh **msh)
 	free(path);
 }
 
+static void			cd_dir(char **cmds, t_msh **msh)
+{
+	char	*path;
+
+	path = ft_strdup(cmds[1]);
+	if (check_directory(path) == 0)
+	{
+		modif_env("OLDPWD", (*msh)->pwd, msh);
+		free((*msh)->pwd);
+		modif_env("PWD", path, msh);
+		(*msh)->pwd = ft_strdup(path);
+	}
+	free(path);
+}
+
 void				exec_cd(char **cmds, t_msh **msh)
 {
 	if (cmds[1] == NULL)
@@ -69,6 +84,6 @@ void				exec_cd(char **cmds, t_msh **msh)
 		cd_twodot(cmds, msh);
 	else if (cmds[1][0] != '/')
 		cd_files(cmds, msh);
-//	else if (cmds[1][0] == '/')
-//		cd_dir(cmds, msh);
+	else if (cmds[1][0] == '/')
+		cd_dir(cmds, msh);
 }

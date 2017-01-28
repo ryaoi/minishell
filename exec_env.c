@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-static void		print_env(t_msh *msh)
+static void		printall_env(t_msh *msh)
 {
 	t_env		*ptr;
 
@@ -21,6 +21,38 @@ static void		env_error(char *str)
 	ft_putstr("env: ");
 	ft_putstr(str);
 	ft_putendl(": No such file or directory");
+	ft_strdel(&str);
+}
+
+void			print_doubledot(char *str, t_msh *msh, int i, int j)
+{
+	char		*name;
+
+	while (str[i] != '\0')
+	{
+		if (str[i] == '$')
+		{
+			i++;
+			j = i;
+			while ((str[j] >= 'A' && str[j] <= 'Z') && str[j] != '\0')
+				j++;
+			j -= i;
+			name = ft_strsub(str, i, j);
+			if (search_env(name, msh->env) == 1)
+				print_env(name, msh->env);
+			else
+				ft_putstr(name);
+			ft_strdel(&name);
+			while ((str[i] >= 'A' && str[i] <= 'Z') && str[i] != '\0')
+				i++;
+		}
+		else
+		{
+			ft_putchar(str[i]);
+			i++;
+		}
+	}
+	ft_strdel(&str);
 }
 
 static void		modify_cmds(char *str, t_msh *msh)
@@ -31,7 +63,7 @@ static void		modify_cmds(char *str, t_msh *msh)
 	name = ft_strsub(str, 1, ft_strlen(str));
 	if (search_env(name, msh->env) == 0)
 	{
-		print_env(msh);
+		printall_env(msh);
 		return ;
 	}
 	else
@@ -48,10 +80,22 @@ static void		modify_cmds(char *str, t_msh *msh)
 
 void			exec_env(char **cmds,t_msh *msh)
 {
+	char		*str;
+
 	if (cmds[1] == NULL)
-		print_env(msh);
-	else if (ft_strchr(cmds[1], '$') == NULL)
-		env_error(cmds[1]);
+		printall_env(msh);
+	else if (cmds[1][0] == '\'')
+	{
+		str = inspectquote(cmds, '\'');
+		env_error(str);
+	}
+	else if (cmds[1][0] == '\"')
+	{
+		ft_putstr("env: ");
+		str = inspectquote(cmds, '\"');
+		print_doubledot(str, msh, 0, 0);
+		ft_putendl(": No such file or directory");
+	}
 	else
 		modify_cmds(cmds[1], msh);
 }
