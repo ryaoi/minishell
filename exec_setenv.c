@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 18:27:28 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/28 19:20:30 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/29 17:31:54 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int				check_env_name(char *str, int i, t_env *env)
 		j++;
 	j -= i;
 	result = ft_strsub(str, i, j);
-	printf("result is:%s\n", result);
 	if (search_env(result, env) == 1)
 		ret = ft_strlen(get_data(result, env));
 	return (ret);
@@ -66,9 +65,9 @@ static char		*replace_env(char *str, t_msh **msh)
 	int			i;
 	int			size;
 
-	i = 1;
+	i = 0;
 	size = 0;
-	while (str[i + 1] != '\0')
+	while (str[i] != '\0')
 	{
 		if (str[i] == '$' && (size += check_env_name(str, ++i, (*msh)->env)) != 0)
 		{
@@ -81,23 +80,31 @@ static char		*replace_env(char *str, t_msh **msh)
 			size++;
 		}
 	}
-	return (get_str_env(str, size, msh, 1));
+	return (get_str_env(str, size, msh));
 }
 
 void			exec_setenv(char **cmds, t_msh **msh)
 {
 	char		*data;
+	char		*str;
 
 	if (check_cmds(cmds) > 0)
 		return ;
 	if (cmds[2][0] == '\'')
-		data = ft_strsub(cmds[2], 1, (ft_strlen(cmds[2])) - 2);
-	else if (cmds[2][0] == '\"' && ft_strchr(cmds[2], '$') != NULL)
-		data = replace_env(cmds[2], msh);
+		data = inspectquotetwo(cmds, '\'');
 	else if (cmds[2][0] == '\"')
-		data = ft_strsub(cmds[2], 1, (ft_strlen(cmds[2])) - 2);
-	else
+	{
+		str = inspectquotetwo(cmds, '\"');
+		data = replace_env(str, msh);
+		ft_strdel(&str);
+	}
+	else if (ft_strchr(cmds[2], '$') == NULL)
 		data = ft_strdup(cmds[2]);
-	set_env(cmds[1], data, msh);
+	else if (search_env((cmds[2] + 1), (*msh)->env) == 1)
+		data = ft_strdup(get_data((cmds[2] + 1), (*msh)->env));
+	if (search_env(cmds[1], (*msh)->env) == 1)
+		replace_envdata(cmds[1], data, (*msh)->env);
+	else
+		set_env(cmds[1], data, msh);
 	ft_strdel(&data);
 }

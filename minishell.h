@@ -42,13 +42,14 @@ void				freecmds(char **cmds);
 void				modif_env(char *name, char *new_ddata, t_msh **msh);
 void				set_env(char *name, char *data, t_msh **msh);
 char				*get_data(char *name, t_env *env);
-char				*get_str_env(char *str, int size, t_msh **msh, int i);
+char				*get_str_env(char *str, int size, t_msh **msh);
 int					check_env_name(char *str, int i, t_env *env);
 int					check_file(char *path, char *file);
 int					check_directory(char *path);
 void				replace_envdata(char *name, char *data, t_env *env);
 void				print_env(char *str, t_env *env);
 char				*inspectquote(char **cmds, char c);
+char				*inspectquotetwo(char **cmds, char c);
 void				print_doubledot(char *str, t_msh *msh, int i, int j);
 
 #endif
