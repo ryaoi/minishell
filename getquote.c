@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 17:24:50 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/28 21:23:17 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/29 16:27:27 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char		*getquote(char **cmds, int size, char c)
 		if (cmds[i] != NULL)
 			result = ft_strjoini(result, " ", 1);
 	}
+	result = ft_strsubfree(result, 1, ft_strlen(result) - 2);
 	return (result);
 }
 

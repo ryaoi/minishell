@@ -16,11 +16,15 @@ static void		printall_env(t_msh *msh)
 	}
 }
 
-static void		env_error(char *str)
+static int		env_error(char *str)
 {
-	ft_putstr("env: ");
-	ft_putstr(str);
-	ft_putendl(": No such file or directory");
+	struct stat	fs;
+
+	lstat(str, &fs);
+	if (access(str, F_OK) != 0)
+		return ((ft_printf("env : %s: No such file or directory\n", str)));
+	else
+		return ((ft_printf("env : %s: Permission denied\n", str)));
 	ft_strdel(&str);
 }
 
@@ -72,7 +76,7 @@ static void		modify_cmds(char *str, t_msh *msh)
 		while (ptr != NULL)
 		{
 			if (ft_strcmp(name, ptr->name) == 0)
-				env_error(ptr->name);
+				env_error(ptr->data);
 			ptr = ptr->next;
 		}
 	}
@@ -91,10 +95,21 @@ void			exec_env(char **cmds,t_msh *msh)
 	}
 	else if (cmds[1][0] == '\"')
 	{
-		ft_putstr("env: ");
 		str = inspectquote(cmds, '\"');
-		print_doubledot(str, msh, 0, 0);
-		ft_putendl(": No such file or directory");
+		printf("str is:%s\n", str);
+		if (ft_strchr(str, '$') == NULL)
+			env_error(str);
+		else
+		{
+			if (search_env(&(str[1]), msh->env) == 1)
+				env_error(get_data(&(str[1]), msh->env));
+			else
+			{
+				ft_putstr("env: ");
+				print_doubledot(str, msh, 0, 0);
+				ft_putendl(": No such file or directory");
+			}
+		}
 	}
 	else
 		modify_cmds(cmds[1], msh);
