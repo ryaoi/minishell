@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_cd.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/29 17:36:47 by ryaoi             #+#    #+#             */
+/*   Updated: 2017/01/29 17:44:03 by ryaoi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -63,7 +74,10 @@ static void			cd_dir(char **cmds, t_msh **msh)
 {
 	char	*path;
 
-	path = ft_strdup(cmds[1]);
+	if (cmds[1][0] == '~')
+		path = ft_strjoin((get_data("HOME", (*msh)->env)), (cmds[1] + 1));
+	else
+		path = ft_strdup(cmds[1]);
 	if (check_directory(path) == 0)
 	{
 		modif_env("OLDPWD", (*msh)->pwd, msh);
@@ -82,8 +96,8 @@ void				exec_cd(char **cmds, t_msh **msh)
 		modif_env("OLDPWD", (*msh)->pwd, msh);
 	else if (ft_strcmp(cmds[1], "..") == 0)
 		cd_twodot(cmds, msh);
+	else if (cmds[1][0] == '/' || cmds[1][0] == '~')
+		cd_dir(cmds, msh);
 	else if (cmds[1][0] != '/')
 		cd_files(cmds, msh);
-	else if (cmds[1][0] == '/')
-		cd_dir(cmds, msh);
 }
