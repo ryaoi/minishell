@@ -20,11 +20,10 @@ static char	*getquote(char **cmds, int size, char c)
 
 	i = 1;
 	result = ft_strnew(size);
-	ft_printf("before the loop\n");
 	while (cmds[i] && size > 0)
 	{
 		if (size >= ft_strlen(cmds[i]))
-			ft_strcat(result, cmds[i]);
+			result = ft_strjoini(result, cmds[i], 1);
 		else
 			ft_strncat(result, cmds[i], size);
 		size -= ft_strlen(cmds[i]);
@@ -37,8 +36,6 @@ static char	*getquote(char **cmds, int size, char c)
 			ft_strdel(&ret);
 		}
 	}
-	ft_printf("after the loop\n");
-	show_cmds(cmds);
 	ret = ft_strsub(result, 1, ft_strlen(result) - 2);
 	ft_strdel(&result);
 	return (ret);
@@ -81,7 +78,7 @@ static char	*getquotetwo(char **cmds, int size, char c)
 	while (cmds[i] && size > 0)
 	{
 		if (size >= ft_strlen(cmds[i]))
-			ft_strcat(result, cmds[i]);
+			result = ft_strjoini(result, cmds[i], 1);
 		else
 			ft_strncat(result, cmds[i], size);
 		size -= ft_strlen(cmds[i]);
