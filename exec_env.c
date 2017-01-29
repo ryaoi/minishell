@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_env.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/29 20:40:37 by ryaoi             #+#    #+#             */
+/*   Updated: 2017/01/29 22:01:06 by ryaoi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -16,22 +27,20 @@ static void		printall_env(t_msh *msh)
 	}
 }
 
-static int		env_error(char *str)
+static void		valid_env(char *str, t_msh *msh, int i, int j)
 {
-	struct stat	fs;
+	char		*name;
 
-	lstat(str, &fs);
-	if (access(str, F_OK) != 0)
-		return ((ft_printf("env : %s: No such file or directory\n", str)));
+	name = ft_strsub(str, i, j);
+	if (search_env(name, msh->env) == 1)
+		print_env(name, msh->env);
 	else
-		return ((ft_printf("env : %s: Permission denied\n", str)));
-	ft_strdel(&str);
+		ft_putstr(name);
+	ft_strdel(&name);
 }
 
 void			print_doubledot(char *str, t_msh *msh, int i, int j)
 {
-	char		*name;
-
 	while (str[i] != '\0')
 	{
 		if (str[i] == '$')
@@ -41,12 +50,7 @@ void			print_doubledot(char *str, t_msh *msh, int i, int j)
 			while ((str[j] >= 'A' && str[j] <= 'Z') && str[j] != '\0')
 				j++;
 			j -= i;
-			name = ft_strsub(str, i, j);
-			if (search_env(name, msh->env) == 1)
-				print_env(name, msh->env);
-			else
-				ft_putstr(name);
-			ft_strdel(&name);
+			valid_env(str, msh, i, j);
 			while ((str[i] >= 'A' && str[i] <= 'Z') && str[i] != '\0')
 				i++;
 		}
@@ -56,7 +60,7 @@ void			print_doubledot(char *str, t_msh *msh, int i, int j)
 			i++;
 		}
 	}
-	ft_strdel(&str);
+	free(str);
 }
 
 static void		modify_cmds(char *str, t_msh *msh)
@@ -82,7 +86,7 @@ static void		modify_cmds(char *str, t_msh *msh)
 	}
 }
 
-void			exec_env(char **cmds,t_msh *msh)
+void			exec_env(char **cmds, t_msh *msh)
 {
 	char		*str;
 
@@ -96,7 +100,6 @@ void			exec_env(char **cmds,t_msh *msh)
 	else if (cmds[1][0] == '\"')
 	{
 		str = inspectquote(cmds, '\"');
-		printf("str is:%s\n", str);
 		if (ft_strchr(str, '$') == NULL)
 			env_error(str);
 		else
@@ -104,11 +107,7 @@ void			exec_env(char **cmds,t_msh *msh)
 			if (search_env(&(str[1]), msh->env) == 1)
 				env_error(get_data(&(str[1]), msh->env));
 			else
-			{
-				ft_putstr("env: ");
-				print_doubledot(str, msh, 0, 0);
-				ft_putendl(": No such file or directory");
-			}
+				env_string_err(str, msh);
 		}
 	}
 	else

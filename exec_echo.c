@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 18:28:05 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/29 16:32:19 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/29 22:44:43 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void			print_env(char *str, t_env *env)
 	ptr = env;
 	while (ptr != NULL)
 	{
-        if (ft_strcmp(str, ptr->name) == 0)
+		if (ft_strcmp(str, ptr->name) == 0)
 		{
-            ft_putstr(ptr->data);
+			ft_putstr(ptr->data);
 			return ;
 		}
-        ptr = ptr->next;
-	}	
+		ptr = ptr->next;
+	}
 }
 
 int				search_env(char *str, t_env *env)
@@ -44,15 +44,14 @@ int				search_env(char *str, t_env *env)
 
 void			exec_echo(char **cmds, t_msh *msh)
 {
-	int			i;
-	int			j;
-	int			max;
 	char		*str;
 
-	i = 1;
 	if (cmds[1] != NULL && cmds[1][0] == '\"')
 	{
+		show_cmds(cmds);
 		str = inspectquote(cmds, '\"');
+		printf("str is %s\n", str);
+		show_cmds(cmds);
 		print_doubledot(str, msh, 0, 0);
 	}
 	else if (cmds[1] != NULL && cmds[1][0] == '\'')

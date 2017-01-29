@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 17:24:50 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/29 17:27:36 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/29 22:50:55 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 static char	*getquote(char **cmds, int size, char c)
 {
 	char	*result;
+	char	*ret;
 	int		i;
 
 	i = 1;
 	result = ft_strnew(size);
+	ft_printf("before the loop\n");
 	while (cmds[i] && size > 0)
 	{
 		if (size >= ft_strlen(cmds[i]))
@@ -28,10 +30,18 @@ static char	*getquote(char **cmds, int size, char c)
 		size -= ft_strlen(cmds[i]);
 		i++;
 		if (cmds[i] != NULL)
-			result = ft_strjoini(result, " ", 1);
+		{
+			ret = ft_strdup(result);
+			ft_strdel(&result);
+			result = ft_strjoin(ret, " ");
+			ft_strdel(&ret);
+		}
 	}
-	result = ft_strsubfree(result, 1, ft_strlen(result) - 2);
-	return (result);
+	ft_printf("after the loop\n");
+	show_cmds(cmds);
+	ret = ft_strsub(result, 1, ft_strlen(result) - 2);
+	ft_strdel(&result);
+	return (ret);
 }
 
 char		*inspectquote(char **cmds, char c)
@@ -63,6 +73,7 @@ char		*inspectquote(char **cmds, char c)
 static char	*getquotetwo(char **cmds, int size, char c)
 {
 	char	*result;
+	char	*ret;
 	int		i;
 
 	i = 2;
@@ -76,10 +87,16 @@ static char	*getquotetwo(char **cmds, int size, char c)
 		size -= ft_strlen(cmds[i]);
 		i++;
 		if (cmds[i] != NULL)
-			result = ft_strjoini(result, " ", 1);
+		{
+			ret = ft_strdup(result);
+			ft_strdel(&result);
+			result = ft_strjoin(ret, " ");
+			ft_strdel(&ret);
+		}
 	}
-	result = ft_strsubfree(result, 1, ft_strlen(result) - 2);
-	return (result);
+	ret = ft_strsub(result, 1, ft_strlen(result) - 2);
+	ft_strdel(&result);
+	return (ret);
 }
 
 char		*inspectquotetwo(char **cmds, char c)

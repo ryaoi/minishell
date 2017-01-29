@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 21:04:00 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/28 16:00:08 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/29 21:34:18 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,19 @@
 
 void		replace_envdata(char *name, char *data, t_env *env)
 {
-	t_env *ptr;
+	t_env	*ptr;
 
 	ptr = env;
 	while (ft_strcmp(name, ptr->name) != 0)
 		ptr = ptr->next;
 	free(ptr->data);
-	printf("ptr->data gonna be:%s\n", data);
 	ptr->data = ft_strdup(data);
-	printf("ptr->name:%s\n", ptr->name);
-	printf("ptr->data:%s\n", ptr->data);
 }
 
-void        set_env(char *name, char *data, t_msh **msh)
+void		set_env(char *name, char *data, t_msh **msh)
 {
-	t_env   *ptr;
-	t_env   *new;
+	t_env	*ptr;
+	t_env	*new;
 
 	if (search_env(name, (*msh)->env) == 1)
 	{
@@ -50,4 +47,25 @@ void        set_env(char *name, char *data, t_msh **msh)
 			ptr = ptr->next;
 		ptr->next = new;
 	}
+}
+
+void		env_string_err(char *str, t_msh *msh)
+{
+	ft_putstr("env: ");
+	print_doubledot(str, msh, 0, 0);
+	ft_putendl(": No such file or directory");
+}
+
+int			env_error(char *str)
+{
+	struct stat fs;
+
+	lstat(str, &fs);
+	if (access(str, F_OK) != 0)
+		return ((ft_printf("env : %s: No such file or directory\n", str)));
+	else
+		return ((ft_printf("env : %s: Permission denied\n", str)));
+	printf("delete str\n");
+	ft_strdel(&str);
+	printf("deleted\n");
 }

@@ -51,5 +51,9 @@ void				print_env(char *str, t_env *env);
 char				*inspectquote(char **cmds, char c);
 char				*inspectquotetwo(char **cmds, char c);
 void				print_doubledot(char *str, t_msh *msh, int i, int j);
+void				exec_bin(char **cmds, t_msh *msh);
+void				env_string_err(char *str, t_msh *msh);
+int					env_error(char *str);
+void				show_cmds(char **cmds);
 
 #endif

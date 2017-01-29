@@ -6,11 +6,24 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 17:36:36 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/29 17:36:38 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/29 22:48:59 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void		show_cmds(char **cmds)
+{
+	int		i;
+
+	i = 0;
+	while (cmds[i] != 0)
+	{
+		ft_printf("we got cmd:%s\n", cmds[i]);
+		i++;
+	}
+	ft_printf("end\n");
+}
 
 void		exec_msh(t_msh **msh, char *line, char **cmds)
 {
@@ -24,18 +37,17 @@ void		exec_msh(t_msh **msh, char *line, char **cmds)
 		{
 			cmds = ft_strsplit(line, ' ');
 			free(line);
-//			printf("cmds[0] is:%s and ft_strlenis:%zu\n", cmds[0], ft_strlen(cmds[0]));
 			if (select_cmd(cmds[0], *msh) == 1)
 				exec_cmd(cmds, msh);
-//			else
-//			{
-//				pid = fork();
-//				if (pid == 0)
-//					exec_bin(cmds, *msh);
-//			}
+			else
+			{
+				pid = fork();
+				if (pid == 0)
+					exec_bin(cmds, *msh);
+			}
 			freecmds(cmds);
 		}
-//		wait(&pid);
+		wait(&pid);
 		ft_putstr("$>");
 	}
 }

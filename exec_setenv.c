@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 18:27:28 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/29 17:31:54 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/29 21:29:55 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ static int		check_cmds(char **cmds)
 	while (cmds[i])
 		i++;
 	if (i < 2)
-		return (ft_printf("Missing the name of the variable to set and the value of the variable\n"));
+	{
+		ft_putstr("Missing the name of the varible");
+		return (ft_printf(" and the value of the variable\n"));
+	}
 	else if (i < 3)
 		return (ft_printf("Missing the value of the variable\n"));
 	else if (all_cap(cmds[1]))
@@ -69,7 +72,8 @@ static char		*replace_env(char *str, t_msh **msh)
 	size = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '$' && (size += check_env_name(str, ++i, (*msh)->env)) != 0)
+		if (str[i] == '$' &&
+			(size += check_env_name(str, ++i, (*msh)->env)) != 0)
 		{
 			while (str[i] >= 'A' && str[i] <= 'Z' && str[i] != '\0')
 				i++;

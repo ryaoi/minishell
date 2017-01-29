@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_msh.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/29 19:45:02 by ryaoi             #+#    #+#             */
+/*   Updated: 2017/01/29 19:45:05 by ryaoi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
+
 static void		init_pwd(t_msh **msh, char **envp)
 {
 	int			i;
@@ -59,14 +71,6 @@ static void		init_bin_dir(t_msh **msh, char **envp)
 	str = ft_strsub(*envp, 5, ft_strlen(*envp));
 	(*msh)->bin_dir = ft_strsplit(str, ':');
 	ft_strdel(&str);
-/*
-    int i = 0;
-    while ((*msh)->bin_dir[i] != 0)
-    {
-        printf("bin_dir:%s\n", (*msh)->bin_dir[i]);
-        i++;
-    }
-*/
 }
 
 void			init_msh(t_msh **msh, char **envp)

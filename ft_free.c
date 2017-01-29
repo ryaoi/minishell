@@ -11,8 +11,8 @@ void		freecmds(char **cmds)
 		free(cmds[i]);
 		i++;
 	}
+	ft_printf("ended\n");
 	free(cmds);
-	cmds = NULL;
 }
 
 void		freeenv(t_env **env)
