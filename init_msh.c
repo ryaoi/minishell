@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 19:45:02 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/29 19:45:05 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/30 18:01:59 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void		init_pwd(t_msh **msh, char **envp)
 {
 	int			i;
-	
+
 	i = 0;
 	while (envp[i] != 0)
 	{
@@ -26,6 +26,7 @@ static void		init_pwd(t_msh **msh, char **envp)
 		i++;
 	}
 }
+
 static void		add_env(t_env **head, char *str)
 {
 	t_env		*ptr;

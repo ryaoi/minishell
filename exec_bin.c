@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 18:26:08 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/29 20:39:05 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/30 17:58:49 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ static void			freeall(char **envp, char *stock, char *str)
 	ft_strdel(&str);
 }
 
+static void			cmd_notfound(char **envp, char *stock)
+{
+	freecmds(envp);
+	ft_printf("minishell: command not found: %s\n", (stock + 1));
+	ft_strdel(&stock);
+	exit(0);
+}
+
 void				exec_bin(char **cmds, t_msh *msh)
 {
 	int		i;
@@ -67,12 +75,10 @@ void				exec_bin(char **cmds, t_msh *msh)
 		if (execve(str, &cmds[0], envp) > 0)
 		{
 			freeall(cmds, stock, str);
-			return ;
+			exit(0);
 		}
 		i++;
 		ft_strdel(&str);
 	}
-	freecmds(envp);
-	ft_printf("minishell: command not found: %s\n", (stock + 1));
-	ft_strdel(&stock);
+	cmd_notfound(envp, stock);
 }

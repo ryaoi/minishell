@@ -6,13 +6,13 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 17:36:47 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/29 17:44:03 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/30 16:57:33 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void				cd_home(char **cmds, t_msh **msh)
+static void			cd_home(t_msh **msh)
 {
 	struct stat		fs;
 
@@ -27,7 +27,7 @@ void				cd_home(char **cmds, t_msh **msh)
 	}
 }
 
-static void			cd_twodot(char **cmds, t_msh **msh)
+static void			cd_twodot(t_msh **msh)
 {
 	int		i;
 	char	*new;
@@ -91,11 +91,11 @@ static void			cd_dir(char **cmds, t_msh **msh)
 void				exec_cd(char **cmds, t_msh **msh)
 {
 	if (cmds[1] == NULL)
-		cd_home(cmds, msh);
+		cd_home(msh);
 	else if (ft_strcmp(cmds[1], ".") == 0)
 		modif_env("OLDPWD", (*msh)->pwd, msh);
 	else if (ft_strcmp(cmds[1], "..") == 0)
-		cd_twodot(cmds, msh);
+		cd_twodot(msh);
 	else if (cmds[1][0] == '/' || cmds[1][0] == '~')
 		cd_dir(cmds, msh);
 	else if (cmds[1][0] != '/')

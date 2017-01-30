@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 20:40:37 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/29 22:01:06 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/30 18:02:21 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ static void		valid_env(char *str, t_msh *msh, int i, int j)
 	name = ft_strsub(str, i, j);
 	if (search_env(name, msh->env) == 1)
 		print_env(name, msh->env);
-//	else
-//		ft_putstr(name);
 	ft_strdel(&name);
 }
 

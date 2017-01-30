@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 19:11:37 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/29 22:00:26 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/30 18:03:08 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,11 @@ char		*get_str_env(char *str, int size, t_msh **msh)
 	i = 0;
 	split = ft_strsplit(str, ' ');
 	result = ft_strnew(size);
-	while(split[i] != 0)
+	while (split[i] != 0)
 	{
 		if (search_env(split[i] + 1, (*msh)->env) == 1)
-			result = ft_strjoini(result, get_data(split[i] + 1, (*msh)->env), 1);
+			result = ft_strjoini(result,
+					get_data(split[i] + 1, (*msh)->env), 1);
 		else
 			result = ft_strjoini(result, split[i], 1);
 		i++;

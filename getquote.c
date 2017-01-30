@@ -6,13 +6,13 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 17:24:50 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/29 22:50:55 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/30 17:00:06 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*getquote(char **cmds, int size, char c)
+static char	*getquote(char **cmds, int size)
 {
 	char	*result;
 	char	*ret;
@@ -22,7 +22,7 @@ static char	*getquote(char **cmds, int size, char c)
 	result = ft_strnew(size);
 	while (cmds[i] && size > 0)
 	{
-		if (size >= ft_strlen(cmds[i]))
+		if ((size_t)size >= ft_strlen(cmds[i]))
 			result = ft_strjoini(result, cmds[i], 1);
 		else
 			ft_strncat(result, cmds[i], size);
@@ -64,10 +64,10 @@ char		*inspectquote(char **cmds, char c)
 		i++;
 		size++;
 	}
-	return (getquote(cmds, size, c));
+	return (getquote(cmds, size));
 }
 
-static char	*getquotetwo(char **cmds, int size, char c)
+static char	*getquotetwo(char **cmds, int size)
 {
 	char	*result;
 	int		i;
@@ -77,7 +77,7 @@ static char	*getquotetwo(char **cmds, int size, char c)
 	result = ft_strnew(size);
 	while (cmds[i] && size > 0)
 	{
-		if (size >= ft_strlen(cmds[i]))
+		if ((size_t)size >= ft_strlen(cmds[i]))
 			result = ft_strjoini(result, cmds[i], 1);
 		else
 			ft_strncat(result, cmds[i], size);
@@ -119,5 +119,5 @@ char		*inspectquotetwo(char **cmds, char c)
 		i++;
 		size++;
 	}
-	return (getquotetwo(cmds, size, c));
+	return (getquotetwo(cmds, size));
 }

@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 21:04:00 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/29 21:34:18 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/30 17:59:12 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,5 @@ int			env_error(char *str)
 		return ((ft_printf("env : %s: No such file or directory\n", str)));
 	else
 		return ((ft_printf("env : %s: Permission denied\n", str)));
-	printf("delete str\n");
 	ft_strdel(&str);
-	printf("deleted\n");
 }
