@@ -6,21 +6,26 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 21:04:00 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/30 17:59:12 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/30 18:39:49 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		replace_envdata(char *name, char *data, t_env *env)
+void		replace_envdata(char *name, char *data, t_msh **msh)
 {
 	t_env	*ptr;
 
-	ptr = env;
+	ptr = (*msh)->env;
 	while (ft_strcmp(name, ptr->name) != 0)
 		ptr = ptr->next;
 	free(ptr->data);
 	ptr->data = ft_strdup(data);
+	if (ft_strcmp(name, "PATH") == 0)
+	{
+		freecmds((*msh)->bin_dir);
+		(*msh)->bin_dir = ft_strsplit(ptr->data, ';');
+	}
 }
 
 void		set_env(char *name, char *data, t_msh **msh)
@@ -30,7 +35,7 @@ void		set_env(char *name, char *data, t_msh **msh)
 
 	if (search_env(name, (*msh)->env) == 1)
 	{
-		replace_envdata(name, data, (*msh)->env);
+		replace_envdata(name, data, msh);
 		return ;
 	}
 	if (!(new = (t_env *)malloc(sizeof(t_env))))

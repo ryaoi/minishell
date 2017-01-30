@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/30 17:57:06 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/30 19:30:41 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char				*get_str_env(char *str, int size, t_msh **msh);
 int					check_env_name(char *str, int i, t_env *env);
 int					check_file(char *path, char *file);
 int					check_directory(char *path);
-void				replace_envdata(char *name, char *data, t_env *env);
+void				replace_envdata(char *name, char *data, t_msh **msh);
 void				print_env(char *str, t_env *env);
 char				*inspectquote(char **cmds, char c);
 char				*inspectquotetwo(char **cmds, char c);
@@ -64,6 +64,5 @@ void				print_doubledot(char *str, t_msh *msh, int i, int j);
 void				exec_bin(char **cmds, t_msh *msh);
 void				env_string_err(char *str, t_msh *msh);
 int					env_error(char *str);
-void				show_cmds(char **cmds);
 
 #endif
