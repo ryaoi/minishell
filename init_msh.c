@@ -58,7 +58,10 @@ static void		init_env(t_msh **msh, char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		add_env(&((*msh)->env), envp[i]);
+		if (ft_strncmp(envp[i], "SHLVL", 5) == 0)
+			add_env(&((*msh)->env), "SHLVL=2");
+		else
+			add_env(&((*msh)->env), envp[i]);
 		i++;
 	}
 }
@@ -91,4 +94,5 @@ void			init_msh(t_msh **msh, char **envp)
 	init_env(msh, envp);
 	init_bin_dir(msh, envp);
 	init_pwd(msh, envp);
+	replace_envdata("SHELL", get_data("PWD", (*msh)->env), msh);
 }
