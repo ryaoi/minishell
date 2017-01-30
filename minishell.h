@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/30 19:30:41 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/30 20:04:23 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void				exec_env(char **cmds, t_msh *msh);
 void				exec_unsetenv(char **cmds, t_msh **msh);
 void				exec_setenv(char **cmds, t_msh **msh);
 void				exec_cd(char **cmds, t_msh **msh);
-void				exec_exit(char ***cmds, t_msh **msh);
+void				exec_exit(char **cmds, t_msh **msh, char **full_cmd);
 int					read_stdin(char **line);
 void				freemsh(t_msh **msh);
 void				freeenv(t_env **env);

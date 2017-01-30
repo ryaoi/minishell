@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 18:02:25 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/30 18:02:34 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/30 20:04:06 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ void		freemsh(t_msh **msh)
 	free((*msh)->home);
 }
 
-void		exec_exit(char ***cmds, t_msh **msh)
+void		exec_exit(char **cmds, t_msh **msh, char **full_cmd)
 {
-	freecmds(*cmds);
+	freecmds(cmds);
+	freecmds(full_cmd);
 	freemsh(msh);
 	free(*msh);
 	exit(EXIT_SUCCESS);

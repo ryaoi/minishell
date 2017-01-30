@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:59:38 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/30 18:03:56 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/01/30 20:04:56 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,4 @@ void		exec_cmd(char **cmds, t_msh **msh)
 		exec_unsetenv(cmds, msh);
 	else if (ft_strcmp(cmds[0], (*msh)->func[4]) == 0)
 		exec_env(cmds, *msh);
-	else if (ft_strcmp(cmds[0], (*msh)->func[5]) == 0)
-		exec_exit(&cmds, msh);
 }
