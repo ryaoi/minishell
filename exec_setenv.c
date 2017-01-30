@@ -60,6 +60,7 @@ int				check_env_name(char *str, int i, t_env *env)
 	result = ft_strsub(str, i, j);
 	if (search_env(result, env) == 1)
 		ret = ft_strlen(get_data(result, env));
+	ft_strdel(&result);
 	return (ret);
 }
 

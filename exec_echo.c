@@ -48,10 +48,7 @@ void			exec_echo(char **cmds, t_msh *msh)
 
 	if (cmds[1] != NULL && cmds[1][0] == '\"')
 	{
-		show_cmds(cmds);
 		str = inspectquote(cmds, '\"');
-		printf("str is %s\n", str);
-		show_cmds(cmds);
 		print_doubledot(str, msh, 0, 0);
 	}
 	else if (cmds[1] != NULL && cmds[1][0] == '\'')

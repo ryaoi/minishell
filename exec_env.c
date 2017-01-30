@@ -34,8 +34,8 @@ static void		valid_env(char *str, t_msh *msh, int i, int j)
 	name = ft_strsub(str, i, j);
 	if (search_env(name, msh->env) == 1)
 		print_env(name, msh->env);
-	else
-		ft_putstr(name);
+//	else
+//		ft_putstr(name);
 	ft_strdel(&name);
 }
 

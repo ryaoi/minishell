@@ -44,10 +44,10 @@ void		exec_msh(t_msh **msh, char *line, char **cmds)
 				pid = fork();
 				if (pid == 0)
 					exec_bin(cmds, *msh);
+				wait(&pid);
 			}
 			freecmds(cmds);
 		}
-		wait(&pid);
 		ft_putstr("$>");
 	}
 }

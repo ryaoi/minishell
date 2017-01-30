@@ -55,14 +55,13 @@ char		*get_str_env(char *str, int size, t_msh **msh)
 	while(split[i] != 0)
 	{
 		if (search_env(split[i] + 1, (*msh)->env) == 1)
-			ft_strcat(result, get_data(split[i] + 1, (*msh)->env));
+			result = ft_strjoini(result, get_data(split[i] + 1, (*msh)->env), 1);
 		else
-			ft_strcat(result, split[i]);
-		free(split[i]);
+			result = ft_strjoini(result, split[i], 1);
 		i++;
 		if (split[i] != 0)
-			ft_strcat(result, " ");
+			result = ft_strjoini(result, " ", 1);
 	}
-	free(split);
+	freecmds(split);
 	return (result);
 }

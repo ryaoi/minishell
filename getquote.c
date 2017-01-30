@@ -70,8 +70,8 @@ char		*inspectquote(char **cmds, char c)
 static char	*getquotetwo(char **cmds, int size, char c)
 {
 	char	*result;
-	char	*ret;
 	int		i;
+	char	*ret;
 
 	i = 2;
 	result = ft_strnew(size);

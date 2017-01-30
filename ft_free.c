@@ -11,7 +11,6 @@ void		freecmds(char **cmds)
 		free(cmds[i]);
 		i++;
 	}
-	ft_printf("ended\n");
 	free(cmds);
 }
 
