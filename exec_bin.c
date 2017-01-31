@@ -51,7 +51,8 @@ static void			freeall(char **envp, char *stock, char *str)
 static void			cmd_notfound(char **envp, char *stock)
 {
 	freecmds(envp);
-	ft_printf("minishell: command not found: %s\n", (stock + 1));
+	if (stock[1] != '$')
+		ft_printf("minishell: command not found: %s\n", (stock + 1));
 	ft_strdel(&stock);
 	exit(0);
 }
