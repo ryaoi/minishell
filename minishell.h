@@ -13,10 +13,11 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft/libft.h"
+# include "libft.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <unistd.h>
+# include <stdio.h>
 
 typedef	struct		s_env
 {
@@ -64,5 +65,7 @@ void				print_doubledot(char *str, t_msh *msh, int i, int j);
 void				exec_bin(char **cmds, t_msh *msh);
 void				env_string_err(char *str, t_msh *msh);
 int					env_error(char *str);
+char				*envtostr(char *str, int i, t_msh **msh);
+char				*straddonefree(char *str, char c, int i);
 
 #endif

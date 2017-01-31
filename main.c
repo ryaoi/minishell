@@ -12,29 +12,14 @@
 
 #include "minishell.h"
 
-static void	cmds_to_env(t_msh **msh, char **cmds)
-{
-	char	*tmp;
-
-	if (ft_strchr(cmds[0], '$') != NULL)
-	{
-		tmp = ft_strdup((cmds[0] + 1));
-		if (search_env(tmp, (*msh)->env) == 1)
-		{
-			free(cmds[0]);
-			cmds[0] = ft_strdup(get_data(tmp, (*msh)->env));
-		}
-		ft_strdel(&tmp);
-	}
-}
-
 static void	sub_msh(t_msh **msh, char *sep_cmd, char **full_cmd)
 {
 	char	**cmds;
 	int		pid;
+	char	*new_cmd;
 
-	cmds = ft_strsplit(sep_cmd, ' ');
-	cmds_to_env(msh, cmds);
+	new_cmd = envtostr(sep_cmd, 0, msh);
+	cmds = ft_strsplit(new_cmd, ' ');
 	if (select_cmd(cmds[0], *msh) == 1)
 	{
 		if (ft_strcmp(cmds[0], "exit") == 0)
@@ -50,6 +35,7 @@ static void	sub_msh(t_msh **msh, char *sep_cmd, char **full_cmd)
 		wait(&pid);
 	}
 	freecmds(cmds);
+	ft_strdel(&new_cmd);
 }
 
 void		exec_msh(t_msh **msh, char *line, char **sep_cmd)
