@@ -6,7 +6,7 @@
 #    By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/30 16:48:59 by ryaoi             #+#    #+#              #
-#    Updated: 2017/01/30 16:58:33 by ryaoi            ###   ########.fr        #
+#    Updated: 2017/02/01 15:52:55 by ryaoi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,9 @@ SRC		= additional_env.c \
 		  getquote.c \
 		  init_msh.c \
 		  main.c \
-		  read_stdin.c
+		  read_stdin.c \
+		  ft_envtostr.c \
+		  ft_straddonei.c
 
 OBJ		= $(SRC:.c=.o)
 
