@@ -54,7 +54,9 @@ static void			cmd_notfound(char **envp, char *stock)
 
 	lstat(stock + 1, &fs);
 	freecmds(envp);
-	if (S_ISDIR(fs.st_mode))
+	if (((fs.st_mode & S_ISUID) && (fs.st_mode &S_IXUSR)) == 0)
+		ft_printf("minishell: %s: permission denied\n", (stock + 1));
+	else if (S_ISDIR(fs.st_mode))
 		ft_printf("minishell: %s: is a directory\n", (stock + 1));
 	else if (stock[1] != '$')
 		ft_printf("minishell: %s: command not found\n", (stock + 1));
