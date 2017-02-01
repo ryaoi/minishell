@@ -50,9 +50,14 @@ static void			freeall(char **envp, char *stock, char *str)
 
 static void			cmd_notfound(char **envp, char *stock)
 {
+	struct stat		fs;
+
+	lstat(stock + 1, &fs);
 	freecmds(envp);
-	if (stock[1] != '$')
-		ft_printf("minishell: command not found: %s\n", (stock + 1));
+	if (S_ISDIR(fs.st_mode))
+		ft_printf("minishell: %s: is a directory\n", (stock + 1));
+	else if (stock[1] != '$')
+		ft_printf("minishell: %s: command not found\n", (stock + 1));
 	ft_strdel(&stock);
 	exit(0);
 }
