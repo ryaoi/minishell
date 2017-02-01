@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 17:36:36 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/30 20:06:30 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/01 15:58:08 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ static void	sub_msh(t_msh **msh, char *sep_cmd, char **full_cmd)
 	int		pid;
 	char	*new_cmd;
 
-	new_cmd = envtostr(sep_cmd, 0, msh);
+	if (ft_strncmp(sep_cmd, "env", 3) != 0)
+		new_cmd = envtostr(sep_cmd, 0, msh);
+	else
+		new_cmd = ft_strdup(sep_cmd);
 	cmds = ft_strsplit(new_cmd, ' ');
 	if (select_cmd(cmds[0], *msh) == 1)
 	{
