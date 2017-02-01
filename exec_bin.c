@@ -46,6 +46,7 @@ static void			freeall(char **envp, char *stock, char *str)
 	freecmds(envp);
 	ft_strdel(&stock);
 	ft_strdel(&str);
+	exit(0);
 }
 
 static void			cmd_notfound(char **envp, char *stock)
@@ -54,14 +55,39 @@ static void			cmd_notfound(char **envp, char *stock)
 
 	lstat(stock + 1, &fs);
 	freecmds(envp);
-	if (((fs.st_mode & S_ISUID) && (fs.st_mode &S_IXUSR)) == 0)
-		ft_printf("minishell: %s: permission denied\n", (stock + 1));
-	else if (S_ISDIR(fs.st_mode))
+	if (S_ISDIR(fs.st_mode))
 		ft_printf("minishell: %s: is a directory\n", (stock + 1));
-	else if (stock[1] != '$')
+	else if (ft_strchr(stock + 1, '/') == NULL)
 		ft_printf("minishell: %s: command not found\n", (stock + 1));
+	else if (stock[0] != '$')
+		ft_printf("minishell: %s: No such file or directory\n", (stock + 1));
 	ft_strdel(&stock);
 	exit(0);
+}
+
+void				exec_dir_bin(char **cmds, t_msh *msh, char **envp)
+{
+	int		i;
+	char	*tmp;
+	char	*verif;
+
+	i = 0;
+	tmp = ft_strdup(ft_strrchr(cmds[0], '/'));
+	while ((msh->bin_dir)[i] != 0)
+	{
+		verif = ft_strjoin((msh->bin_dir)[i], tmp);
+		if (ft_strcmp(verif, cmds[0]) == 0)
+		{
+			free(cmds[0]);
+			cmds[0] = ft_strdup(verif);
+			if (execve(verif, &cmds[0], envp) > 0)
+				freeall(cmds, tmp, verif);
+		}
+		ft_strdel(&verif);
+		i++;
+	}
+	ft_strdel(&tmp);
+	cmd_notfound(envp, cmds[0]);
 }
 
 void				exec_bin(char **cmds, t_msh *msh)
@@ -74,6 +100,8 @@ void				exec_bin(char **cmds, t_msh *msh)
 	i = 0;
 	chdir(msh->pwd);
 	envp = tab_env(msh->env);
+	if (cmds[0][0] == '/')
+		exec_dir_bin(cmds, msh, envp);
 	stock = ft_strjoin("/", cmds[0]);
 	while ((msh->bin_dir)[i] != 0)
 	{
@@ -81,10 +109,7 @@ void				exec_bin(char **cmds, t_msh *msh)
 		free(cmds[0]);
 		cmds[0] = ft_strdup(str);
 		if (execve(str, &cmds[0], envp) > 0)
-		{
 			freeall(cmds, stock, str);
-			exit(0);
-		}
 		i++;
 		ft_strdel(&str);
 	}
