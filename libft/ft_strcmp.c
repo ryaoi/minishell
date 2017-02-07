@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_straddonei.c                                    :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/07 19:59:56 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/07 19:59:58 by ryaoi            ###   ########.fr       */
+/*   Created: 2016/11/03 14:47:17 by ryaoi             #+#    #+#             */
+/*   Updated: 2016/11/06 14:19:56 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <stdlib.h>
 
-char		*straddonefree(char *str, char c, int i)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	char	*stock;
-	char	*result;
+	int i;
 
-	stock = ft_strnew(1);
-	stock[0] = c;
-	result = ft_strjoini(str, stock, i);
-	ft_strdel(&stock);
-	return (result);
+	i = 0;
+	if (s1 == NULL)
+		return (-(unsigned char)s2[0]);
+	while (s1[i] != '\0' && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

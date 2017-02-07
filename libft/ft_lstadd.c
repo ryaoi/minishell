@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_straddonei.c                                    :+:      :+:    :+:   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/07 19:59:56 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/07 19:59:58 by ryaoi            ###   ########.fr       */
+/*   Created: 2016/11/03 16:47:43 by ryaoi             #+#    #+#             */
+/*   Updated: 2016/11/03 20:02:26 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
+#include <stdlib.h>
 
-char		*straddonefree(char *str, char c, int i)
+void	ft_lstadd(t_list **alst, t_list *new)
 {
-	char	*stock;
-	char	*result;
+	t_list	*ptr;
 
-	stock = ft_strnew(1);
-	stock[0] = c;
-	result = ft_strjoini(str, stock, i);
-	ft_strdel(&stock);
-	return (result);
+	ptr = *alst;
+	if (*alst == NULL)
+		*alst = new;
+	else
+	{
+		new->next = *alst;
+		*alst = new;
+	}
 }

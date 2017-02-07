@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_straddonei.c                                    :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/07 19:59:56 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/07 19:59:58 by ryaoi            ###   ########.fr       */
+/*   Created: 2016/11/03 14:52:32 by ryaoi             #+#    #+#             */
+/*   Updated: 2016/11/03 14:52:34 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <string.h>
 
-char		*straddonefree(char *str, char c, int i)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	char	*stock;
-	char	*result;
+	size_t i;
+	size_t j;
 
-	stock = ft_strnew(1);
-	stock[0] = c;
-	result = ft_strjoini(str, stock, i);
-	ft_strdel(&stock);
-	return (result);
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
+		i++;
+	while (s2[j] != '\0' && j < n)
+	{
+		s1[i] = s2[j];
+		i++;
+		j++;
+	}
+	s1[i] = '\0';
+	return (s1);
 }

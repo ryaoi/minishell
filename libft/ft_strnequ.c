@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_straddonei.c                                    :+:      :+:    :+:   */
+/*   ft_strnequ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/07 19:59:56 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/07 19:59:58 by ryaoi            ###   ########.fr       */
+/*   Created: 2016/11/03 14:55:07 by ryaoi             #+#    #+#             */
+/*   Updated: 2016/11/06 14:16:48 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
+#include <stdlib.h>
 
-char		*straddonefree(char *str, char c, int i)
+int		ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-	char	*stock;
-	char	*result;
-
-	stock = ft_strnew(1);
-	stock[0] = c;
-	result = ft_strjoini(str, stock, i);
-	ft_strdel(&stock);
-	return (result);
+	if (s1 == NULL && s2 == NULL)
+		return (1);
+	if (s1 == NULL || s2 == NULL)
+		return (0);
+	if (ft_strncmp(s1, s2, n) == 0)
+		return (1);
+	else
+		return (0);
 }

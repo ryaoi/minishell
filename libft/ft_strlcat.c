@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_straddonei.c                                    :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/07 19:59:56 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/07 19:59:58 by ryaoi            ###   ########.fr       */
+/*   Created: 2016/11/03 14:50:59 by ryaoi             #+#    #+#             */
+/*   Updated: 2016/11/05 17:42:45 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-char		*straddonefree(char *str, char c, int i)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	char	*stock;
-	char	*result;
+	size_t		dst_len;
+	size_t		src_len;
 
-	stock = ft_strnew(1);
-	stock[0] = c;
-	result = ft_strjoini(str, stock, i);
-	ft_strdel(&stock);
-	return (result);
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	if (size <= dst_len)
+		return (size + src_len);
+	else
+		ft_strncat(dst, src, size - dst_len - 1);
+	return (dst_len + ft_strlen(src));
 }

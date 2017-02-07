@@ -6,18 +6,23 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/30 20:04:23 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/07 19:57:07 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft.h"
+# include "libft/libft.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <unistd.h>
-# include <stdio.h>
+# include <termios.h>
+# include <termcap.h>
+# include <fcntl.h>
+# include <term.h>
+# include <signal.h>
+# include <sys/ioctl.h>
 
 typedef	struct		s_env
 {

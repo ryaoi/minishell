@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 18:26:08 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/30 17:58:49 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/07 19:17:42 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char			**tab_env(t_env *env)
 {
 	int		i;
 	t_env	*ptr;
-	char	**tab;
+	char	**ret_tab;
 	char	*stock;
 
 	ptr = env;
@@ -26,19 +26,19 @@ static char			**tab_env(t_env *env)
 		ptr = ptr->next;
 		i++;
 	}
-	if (!(tab = (char **)malloc(sizeof(char *) * (i + 1))))
+	if (!(ret_tab = (char **)malloc(sizeof(char *) * (i + 1))))
 		return (NULL);
 	ptr = env;
 	i = 0;
 	while (ptr != NULL)
 	{
 		stock = ft_strjoin(ptr->name, "=");
-		tab[i] = ft_strjoini(stock, ptr->data, 1);
+		ret_tab[i] = ft_strjoini(stock, ptr->data, 1);
 		i++;
 		ptr = ptr->next;
 	}
-	tab[i] = 0;
-	return (tab);
+	ret_tab[i] = 0;
+	return (ret_tab);
 }
 
 static void			freeall(char **envp, char *stock, char *str)

@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_straddonei.c                                    :+:      :+:    :+:   */
+/*   ft_put_space.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/07 19:59:56 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/07 19:59:58 by ryaoi            ###   ########.fr       */
+/*   Created: 2016/12/10 16:58:56 by ryaoi             #+#    #+#             */
+/*   Updated: 2016/12/10 17:00:22 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_printf.h"
 
-char		*straddonefree(char *str, char c, int i)
+void	ft_put_space(t_pf **pf, long long nbr)
 {
-	char	*stock;
-	char	*result;
+	int	i;
 
-	stock = ft_strnew(1);
-	stock[0] = c;
-	result = ft_strjoini(str, stock, i);
-	ft_strdel(&stock);
-	return (result);
+	i = 0;
+	if ((*pf)->width > ft_count_digit_base(nbr, 10)
+		&& (*pf)->flag_plus == 0 && (*pf)->flag_space == 1)
+		((*pf)->result)[i] = ' ';
+	else if ((*pf)->flag_space == 1 && (*pf)->flag_minus == 0 &&
+		(*pf)->flag_plus == 0 && (*pf)->width == 0 && nbr >= 0)
+	{
+		ft_putchar(' ');
+		(*pf)->ret++;
+		i++;
+	}
 }

@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_straddonei.c                                    :+:      :+:    :+:   */
+/*   ft_init_pf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/07 19:59:56 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/07 19:59:58 by ryaoi            ###   ########.fr       */
+/*   Created: 2016/12/03 19:05:30 by ryaoi             #+#    #+#             */
+/*   Updated: 2016/12/08 16:45:12 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_printf.h"
 
-char		*straddonefree(char *str, char c, int i)
+t_pf		*init_pf(void)
 {
-	char	*stock;
-	char	*result;
+	t_pf	*new;
 
-	stock = ft_strnew(1);
-	stock[0] = c;
-	result = ft_strjoini(str, stock, i);
-	ft_strdel(&stock);
-	return (result);
+	if (!(new = (t_pf *)malloc(sizeof(t_pf))))
+		return (NULL);
+	new->specifer = '0';
+	new->flag_diese = 0;
+	new->flag_space = 0;
+	new->flag_minus = 0;
+	new->flag_plus = 0;
+	new->flag_zero = 0;
+	new->flag_dot = 0;
+	new->width = 0;
+	new->precision = 0;
+	new->skip = 0;
+	new->ret = 0;
+	new->result = NULL;
+	new->length = NULL;
+	return (new);
 }

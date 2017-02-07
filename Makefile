@@ -6,7 +6,7 @@
 #    By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/30 16:48:59 by ryaoi             #+#    #+#              #
-#    Updated: 2017/02/01 15:52:55 by ryaoi            ###   ########.fr        #
+#    Updated: 2017/02/07 19:57:35 by ryaoi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ $(LIBFT):
 	make -C $(DIR_LIB)
 
 $(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) ./libft/libft.a $(OBJ) $(INCLUDE)
+	$(CC) $(CFLAGS) -o $(NAME) ./libft/libft.a $(OBJ) $(INCLUDE) -ltermcap
 
 clean:
 	make clean -C $(DIR_LIB)

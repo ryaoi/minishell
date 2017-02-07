@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 17:36:36 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/01 15:58:08 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/07 19:57:42 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,11 @@ void		exec_msh(t_msh **msh, char *line, char **sep_cmd)
 int			main(int argc, char **argv, char **envp)
 {
 	t_msh	*msh;
-	char	*line;
-	char	**cmds;
 
-	line = NULL;
-	cmds = NULL;
 	(void)argc;
 	(void)argv;
 	init_msh(&msh, envp);
 	ft_putstr("$>");
-	exec_msh(&msh, line, cmds);
+	exec_msh(&msh, NULL, NULL);
 	return (0);
 }

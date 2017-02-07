@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_straddonei.c                                    :+:      :+:    :+:   */
+/*   ft_stradjust.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/07 19:59:56 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/07 19:59:58 by ryaoi            ###   ########.fr       */
+/*   Created: 2016/12/10 17:01:42 by ryaoi             #+#    #+#             */
+/*   Updated: 2016/12/10 17:01:44 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_printf.h"
 
-char		*straddonefree(char *str, char c, int i)
+void		ft_stradjust(t_pf **pf)
 {
-	char	*stock;
-	char	*result;
+	int		i;
+	int		j;
+	char	*tmp;
 
-	stock = ft_strnew(1);
-	stock[0] = c;
-	result = ft_strjoini(str, stock, i);
-	ft_strdel(&stock);
-	return (result);
+	tmp = ft_strnew(ft_strlen((*pf)->result));
+	ft_memset(tmp, ' ', ft_strlen((*pf)->result));
+	j = 0;
+	i = 0;
+	while (((*pf)->result)[i] == ' ')
+		i++;
+	while (((*pf)->result)[i] != '\0')
+	{
+		tmp[j] = ((*pf)->result)[i];
+		j++;
+		i++;
+	}
+	free((*pf)->result);
+	(*pf)->result = ft_strdup(tmp);
+	ft_strdel(&tmp);
 }
