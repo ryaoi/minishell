@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 18:27:28 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/30 18:33:50 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/10 21:34:40 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,10 @@ void			exec_setenv(char **cmds, t_msh **msh)
 	else if (search_env((cmds[2] + 1), (*msh)->env) == 1)
 		data = ft_strdup(get_data((cmds[2] + 1), (*msh)->env));
 	if (search_env(cmds[1], (*msh)->env) == 1)
-		replace_envdata(cmds[1], data, msh);
+		replace_envdata(cmds[1], data, msh,
+		((ft_strchr(cmds[2], '\'') != NULL) ? 1 : 0));
 	else
-		set_env(cmds[1], data, msh);
+		set_env(cmds[1], data, msh,
+		((ft_strchr(cmds[2], '\'') != NULL) ? 1 : 0));
 	ft_strdel(&data);
 }

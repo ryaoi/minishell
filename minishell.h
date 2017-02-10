@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 20:01:47 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/10 21:34:04 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef	struct		s_env
 {
 	char			*name;
 	char			*data;
+	int				modif;
 	struct s_env	*next;
 }					t_env;
 
@@ -60,13 +61,14 @@ void				freemsh(t_msh **msh);
 void				freeenv(t_env **env);
 void				freecmds(char **cmds);
 void				modif_env(char *name, char *new_ddata, t_msh **msh);
-void				set_env(char *name, char *data, t_msh **msh);
+void				set_env(char *name, char *data, t_msh **msh, int modif);
 char				*get_data(char *name, t_env *env);
 char				*get_str_env(char *str, int size, t_msh **msh);
 int					check_env_name(char *str, int i, t_env *env);
 int					check_file(char *path, char *file);
 int					check_directory(char *path);
-void				replace_envdata(char *name, char *data, t_msh **msh);
+void				replace_envdata(char *name, char *data, t_msh **msh,
+					int modif);
 void				print_env(char *str, t_env *env);
 char				*inspectquote(char **cmds, char c);
 char				*inspectquotetwo(char **cmds, char c);

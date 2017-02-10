@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 19:45:02 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 18:50:06 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/10 21:04:22 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void		add_env(t_env **head, char *str)
 		exit(EXIT_FAILURE);
 	new->name = ft_strdup(tmp[0]);
 	new->data = ft_strdup(tmp[1]);
+	new->modif = 0;
 	freecmds(tmp);
 	new->next = NULL;
 	if ((*head) == NULL)
@@ -94,5 +95,6 @@ void			init_msh(t_msh **msh, char **envp)
 	init_env(msh, envp);
 	init_bin_dir(msh, envp);
 	init_pwd(msh, envp);
-	replace_envdata("SHELL", get_data("PWD", (*msh)->env), msh);
+	replace_envdata("SHELL", get_data("PWD", (*msh)->env), msh, 0);
+	ft_printf("after replace envdata\n");
 }
