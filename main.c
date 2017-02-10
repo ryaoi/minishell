@@ -6,11 +6,18 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 17:36:36 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/07 19:57:42 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/10 17:39:37 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	intro(void)
+{
+	ft_putstr("------------------\n");
+	ft_putstr("|   minishell    |\n");
+	ft_putstr("------------------\n");
+}
 
 static void	sub_msh(t_msh **msh, char *sep_cmd, char **full_cmd)
 {
@@ -72,6 +79,9 @@ int			main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	init_msh(&msh, envp);
+	init_term(msh);
+	clrterm();
+	intro();
 	ft_putstr("$>");
 	exec_msh(&msh, NULL, NULL);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 18:02:25 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/07 19:53:39 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/10 17:36:36 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void		exec_exit(char **cmds, t_msh **msh, char **full_cmd)
 	freecmds(cmds);
 	freecmds(full_cmd);
 	freemsh(msh);
+	reset_term(*msh);
 	free(*msh);
 	exit(EXIT_SUCCESS);
 }

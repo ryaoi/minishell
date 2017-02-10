@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 20:24:30 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/07 19:45:47 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/07 21:19:01 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int			read_stdin(char **line)
 	{
 		flag = 1;
 		buf[ret] = '\0';
-		str = ft_strjoini(str, buf, 1);
+		if (buf[0] != '\t')
+			str = ft_strjoini(str, buf, 1);
 	}
 	*line = ft_strdup(str);
 	ft_strdel(&str);

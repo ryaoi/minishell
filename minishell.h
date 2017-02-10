@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/07 19:57:07 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/10 17:28:39 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef	struct		s_env
 typedef struct		s_msh
 {
 	t_env			*env;
+	struct termios	term;
 	char			**func;
 	char			**bin_dir;
 	char			*pwd;
@@ -72,5 +73,10 @@ void				env_string_err(char *str, t_msh *msh);
 int					env_error(char *str);
 char				*envtostr(char *str, int i, t_msh **msh);
 char				*straddonefree(char *str, char c, int i);
+int					fdputc(int c);
+int					init_term(t_msh *msh);
+int					reset_term(t_msh *msh);
+void				handle_signal(t_msh *msh);
+void				clrterm(void);
 
 #endif
