@@ -6,7 +6,7 @@
 #    By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 14:11:33 by ryaoi             #+#    #+#              #
-#    Updated: 2017/01/10 19:54:43 by ryaoi            ###   ########.fr        #
+#    Updated: 2017/02/10 20:16:07 by ryaoi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,7 +118,9 @@ SRC		= ./ft_atoi.c \
 		  ./ft_strjoini.c \
 		  ./ft_strsubfree.c \
 		  ./ft_countn.c \
-		  ./ft_countspace.c
+		  ./ft_countspace.c \
+		  ./ft_strerase.c \
+		  ./ft_strerasef.c
 
 OBJ		= $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 18:37:27 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/10 20:01:47 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ int					init_term(t_msh *msh);
 int					reset_term(t_msh *msh);
 void				handle_signal(t_msh *msh);
 void				clrterm(void);
+void				print_echo(char **cmds, t_msh *msh);
 
 #endif

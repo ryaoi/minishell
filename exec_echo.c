@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 18:28:05 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 18:55:56 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/10 20:36:27 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,13 @@ void			exec_echo(char **cmds, t_msh *msh)
 {
 	char		*str;
 
-	if (cmds[1] != NULL && cmds[1][0] == '\"')
-	{
-		str = inspectquote(cmds, '\"');
-		print_doubledot(str, msh, 0, 0);
-	}
-	else if (cmds[1] != NULL && cmds[1][0] == '\'')
+	if (cmds[1] != NULL && cmds[1][0] == '\'')
 	{
 		str = inspectquote(cmds, '\'');
 		ft_putstr(str);
 		ft_strdel(&str);
 	}
 	else if (cmds[1] != NULL)
-	{
-		str = ft_strsub(cmds[1], 1, ft_strlen(cmds[1]));
-		if (ft_strchr(cmds[1], '$') == NULL)
-			ft_putstr(cmds[1]);
-		else if (search_env(str, msh->env) == 1)
-			print_env(str, msh->env);
-		ft_strdel(&str);
-	}
+		print_echo(cmds, msh);
 	ft_putchar('\n');
 }
