@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 17:28:39 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/10 18:37:27 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <term.h>
 # include <signal.h>
 # include <sys/ioctl.h>
+
+# define GREEN	"\x1b[32m"
+# define RESET	"\x1b[0m"
 
 typedef	struct		s_env
 {

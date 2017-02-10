@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 17:36:47 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/30 16:57:33 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/10 19:06:49 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ static void			cd_twodot(t_msh **msh)
 	ft_strdel(&new);
 }
 
-static void			cd_files(char **cmds, t_msh **msh)
+static void			cd_files(char *str, t_msh **msh)
 {
 	char	*path;
 
 	path = NULL;
 	path = ft_strjoin((*msh)->pwd, "/");
-	path = ft_strjoini(path, cmds[1], 1);
-	if (check_file(path, cmds[1]) == 0)
+	path = ft_strjoini(path, str, 1);
+	if (check_file(path, str) == 0)
 	{
 		modif_env("OLDPWD", (*msh)->pwd, msh);
 		free((*msh)->pwd);
@@ -70,14 +70,14 @@ static void			cd_files(char **cmds, t_msh **msh)
 	free(path);
 }
 
-static void			cd_dir(char **cmds, t_msh **msh)
+static void			cd_dir(char *str, t_msh **msh)
 {
 	char	*path;
 
-	if (cmds[1][0] == '~')
-		path = ft_strjoin((get_data("HOME", (*msh)->env)), (cmds[1] + 1));
+	if (str[0] == '~')
+		path = ft_strjoin((get_data("HOME", (*msh)->env)), (str + 1));
 	else
-		path = ft_strdup(cmds[1]);
+		path = ft_strdup(str);
 	if (check_directory(path) == 0)
 	{
 		modif_env("OLDPWD", (*msh)->pwd, msh);
@@ -90,14 +90,26 @@ static void			cd_dir(char **cmds, t_msh **msh)
 
 void				exec_cd(char **cmds, t_msh **msh)
 {
+	char	*str;
+
 	if (cmds[1] == NULL)
+	{
 		cd_home(msh);
-	else if (ft_strcmp(cmds[1], ".") == 0)
+		return ;
+	}
+	if (cmds[1][0] == '\"')
+		str = inspectquote(cmds, '\"');
+	else if (cmds[1][0] == '\'')
+		str = inspectquote(cmds, '\'');
+	else
+		str = ft_strdup(cmds[1]);
+	if (ft_strcmp(str, ".") == 0)
 		modif_env("OLDPWD", (*msh)->pwd, msh);
-	else if (ft_strcmp(cmds[1], "..") == 0)
+	else if (ft_strcmp(str, "..") == 0)
 		cd_twodot(msh);
-	else if (cmds[1][0] == '/' || cmds[1][0] == '~')
-		cd_dir(cmds, msh);
-	else if (cmds[1][0] != '/')
-		cd_files(cmds, msh);
+	else if (str[0] == '/' || str[0] == '~')
+		cd_dir(str, msh);
+	else if (str[0] != '/')
+		cd_files(str, msh);
+	ft_strdel(&str);
 }

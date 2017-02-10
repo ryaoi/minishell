@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 17:36:36 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 17:39:37 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/10 18:48:55 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 static void	intro(void)
 {
+	ft_putstr(GREEN);
 	ft_putstr("------------------\n");
 	ft_putstr("|   minishell    |\n");
 	ft_putstr("------------------\n");
+	ft_putstr(RESET);
 }
 
 static void	sub_msh(t_msh **msh, char *sep_cmd, char **full_cmd)
@@ -25,7 +27,7 @@ static void	sub_msh(t_msh **msh, char *sep_cmd, char **full_cmd)
 	int		pid;
 	char	*new_cmd;
 
-	if (ft_strncmp(sep_cmd, "env", 3) != 0)
+	if (ft_strchr(sep_cmd, '\'') == NULL)
 		new_cmd = envtostr(sep_cmd, 0, msh);
 	else
 		new_cmd = ft_strdup(sep_cmd);

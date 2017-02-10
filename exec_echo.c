@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 18:28:05 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/29 22:44:43 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/10 18:55:56 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void			exec_echo(char **cmds, t_msh *msh)
 	{
 		str = inspectquote(cmds, '\'');
 		ft_putstr(str);
+		ft_strdel(&str);
 	}
 	else if (cmds[1] != NULL)
 	{
@@ -63,6 +64,7 @@ void			exec_echo(char **cmds, t_msh *msh)
 			ft_putstr(cmds[1]);
 		else if (search_env(str, msh->env) == 1)
 			print_env(str, msh->env);
+		ft_strdel(&str);
 	}
 	ft_putchar('\n');
 }
