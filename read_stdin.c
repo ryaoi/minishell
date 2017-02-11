@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 20:24:30 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 14:42:41 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 16:14:27 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int			read_stdin(char **line)
 	}
 	*line = ft_strdup(str);
 	ft_strdel(&str);
-	if (*buf == '\n' && flag == 0)
+	if ((*buf == '\n' && flag == 0) || stronly(*line, ' ') == 1)
 		return (0);
 	return (ret);
 }

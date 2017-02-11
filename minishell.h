@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 21:34:04 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 16:14:40 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ void				clrterm(void);
 void				print_echo(char **cmds, t_msh *msh);
 void				check_single(char **str);
 void				check_space(char **cmds);
+int					stronly(char *str, char c);
 
 #endif

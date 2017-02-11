@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 21:04:00 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 14:53:03 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 16:32:18 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,14 @@ void		replace_envdata(char *name, char *data, t_msh **msh, int modif)
 	if (ft_strcmp(name, "PATH") == 0)
 	{
 		freecmds((*msh)->bin_dir);
-		(*msh)->bin_dir = ft_strsplit(ptr->data, ';');
+		(*msh)->bin_dir = ft_strsplit(ptr->data, ':');
 	}
+}
+
+static void	renewall_path(t_msh **msh, char *data)
+{
+	freecmds((*msh)->bin_dir);
+	(*msh)->bin_dir = ft_strsplit(data, ':');
 }
 
 void		set_env(char *name, char *data, t_msh **msh, int modif)
@@ -54,6 +60,8 @@ void		set_env(char *name, char *data, t_msh **msh, int modif)
 			ptr = ptr->next;
 		ptr->next = new;
 	}
+	if (ft_strcmp(name, "PATH") == 0)
+		renewall_path(msh, data);
 }
 
 void		env_string_err(char *str, t_msh *msh)

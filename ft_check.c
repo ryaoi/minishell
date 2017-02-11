@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 19:03:12 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 14:43:36 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 16:15:07 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,18 @@ void			check_space(char **cmds)
 		}
 		ft_strdel(&str);
 	}
+}
+
+int				stronly(char *str, char c)
+{
+	int			i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != c)
+			return (0);
+		i++;
+	}
+	return (1);
 }
