@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 19:45:02 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 14:52:55 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 18:54:54 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void			init_msh(t_msh **msh, char **envp)
 	(*msh)->func[5] = ft_strdup("exit");
 	(*msh)->func[6] = 0;
 	(*msh)->env = NULL;
+	(*msh)->process = 0;
 	init_env(msh, envp);
 	init_bin_dir(msh, envp);
 	init_pwd(msh, envp);

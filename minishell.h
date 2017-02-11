@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 16:14:40 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 18:46:26 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct		s_msh
 	char			**bin_dir;
 	char			*pwd;
 	char			*home;
+	int				process;
 }					t_msh;
 
 void				init_msh(t_msh **msh, char **envp);

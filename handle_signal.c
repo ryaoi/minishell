@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:22:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 16:00:27 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 19:01:11 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static t_msh	*mshtoglb(t_msh *msh)
 static void		ft_sigint(int sig)
 {
 	(void)sig;
-	reset_term(g_msh);
-	freemsh(&g_msh);
-	free(g_msh);
-	exit(0);
+	if (g_msh->process == 0)
+		ft_putstr("\n$>");
+	else
+		ft_putstr("\n");
 }
 
 static void		ft_sigcont(int sig)
@@ -40,7 +40,6 @@ static void		ft_sigcont(int sig)
 static void		ft_sigstop(int sig)
 {
 	(void)sig;
-	clrterm();
 	tcsetattr(0, 0, &(g_msh->term));
 	tputs(tgetstr("te", NULL), 1, fdputc);
 }
