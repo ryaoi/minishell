@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 20:40:37 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 21:15:57 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 15:13:33 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,21 @@ static void		modify_cmds(char *str, t_msh *msh)
 	t_env		*ptr;
 	char		*name;
 
-	name = ft_strsub(str, 1, ft_strlen(str));
-	if (search_env(name, msh->env) == 0)
+	name = ft_strsub(str, 1, ft_strlen(str) - 1);
+	name = ft_strjoini("/", name, 2);
+	ptr = msh->env;
+	while (ptr != NULL)
 	{
-		printall_env(msh);
-		return ;
-	}
-	else
-	{
-		ptr = msh->env;
-		while (ptr != NULL)
+		if (ft_strcmp(name, ptr->data) == 0)
 		{
-			if (ft_strcmp(name, ptr->name) == 0)
-				env_error(ptr->data);
-			ptr = ptr->next;
+			env_error(ptr->data);
+			ft_strdel(&name);
+			return ;
 		}
+		ptr = ptr->next;
 	}
+	printall_env(msh);
+	ft_strdel(&name);
 }
 
 void			exec_env(char **cmds, t_msh *msh)
