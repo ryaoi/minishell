@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 21:24:59 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 19:36:04 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 19:38:19 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void			exec_unsetenv(char **cmds, t_msh **msh)
 			free(ptr->name);
 			free(ptr->data);
 			free(ptr);
-			ft_printf("%s\n", cmds[1]);
 			if (ft_strcmp(cmds[1], "PATH") == 0)
 				free_path(msh);
 			return ;
