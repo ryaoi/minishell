@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 21:04:00 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 21:22:51 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 14:53:03 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void		replace_envdata(char *name, char *data, t_msh **msh, int modif)
 	t_env	*ptr;
 
 	ptr = (*msh)->env;
-	ft_printf("loop\n");
 	while (ft_strcmp(name, ptr->name) != 0)
 		ptr = ptr->next;
 	free(ptr->data);

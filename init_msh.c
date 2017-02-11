@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 19:45:02 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 21:04:22 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 14:52:55 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,4 @@ void			init_msh(t_msh **msh, char **envp)
 	init_bin_dir(msh, envp);
 	init_pwd(msh, envp);
 	replace_envdata("SHELL", get_data("PWD", (*msh)->env), msh, 0);
-	ft_printf("after replace envdata\n");
 }
