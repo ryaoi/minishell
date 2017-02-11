@@ -99,6 +99,7 @@ void				exec_bin(char **cmds, t_msh *msh)
 
 	i = 0;
 	chdir(msh->pwd);
+	check_space(cmds);
 	envp = tab_env(msh->env);
 	if (cmds[0][0] == '/')
 		exec_dir_bin(cmds, msh, envp);

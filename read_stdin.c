@@ -12,6 +12,40 @@
 
 #include "minishell.h"
 
+static int	count_char(char *str, char c)
+{
+	int		i;
+	int		ret;
+
+	i = 0;
+	ret = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			ret++;
+		i++;
+	}
+	return (ret);
+}
+
+void		check_single(char **str)
+{
+	char	*stock;
+
+	stock = ft_strdup(*str);
+	if (ft_strcmp(*str, "\"") == 0 || count_char(*str, '\"') == 1)
+	{
+		ft_strdel(str);
+		*str = ft_strjoin(stock, "\"");
+	}
+	else if (ft_strcmp(*str, "\'") == 0 || count_char(*str, '\'') == 1)
+	{
+		ft_strdel(str);
+		*str = ft_strjoin(stock, "\'");
+	}
+	ft_strdel(&stock);
+}
+
 int			read_stdin(char **line)
 {
 	int		ret;
@@ -69,4 +103,23 @@ void		print_echo(char **cmds, t_msh *msh)
 		i++;
 		print_space(cmds[i]);
 	}
+}
+
+void		check_space(char **cmds)
+{
+	char	*str;
+
+	str = NULL;
+	if (cmds[0][0] == '\"')
+		str = inspectquotezero(cmds, '\"');
+	if (cmds[0][0] == '\'')
+		str = inspectquotezero(cmds, '\'');
+	if (ft_strchr(str, ' ') != NULL)
+	{
+		ft_printf("minishell: %s: command not found\n", str);
+		ft_strdel(&str);
+		freecmds(cmds);
+		exit(0);
+	}
+	ft_strdel(&str);
 }

@@ -72,6 +72,7 @@ void				replace_envdata(char *name, char *data, t_msh **msh,
 void				print_env(char *str, t_env *env);
 char				*inspectquote(char **cmds, char c);
 char				*inspectquotetwo(char **cmds, char c);
+char				*inspectquotezero(char **cmds, char c);
 void				print_doubledot(char *str, t_msh *msh, int i, int j);
 void				exec_bin(char **cmds, t_msh *msh);
 void				env_string_err(char *str, t_msh *msh);
@@ -84,5 +85,7 @@ int					reset_term(t_msh *msh);
 void				handle_signal(t_msh *msh);
 void				clrterm(void);
 void				print_echo(char **cmds, t_msh *msh);
+void				check_single(char **str);
+void				check_space(char **cmds);
 
 #endif

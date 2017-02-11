@@ -34,7 +34,8 @@ SRC		= additional_env.c \
 		  ft_envtostr.c \
 		  ft_straddonei.c \
 		  init_term.c \
-		  handle_signal.c
+		  handle_signal.c \
+		  getquotezero.c
 
 OBJ		= $(SRC:.c=.o)
 
