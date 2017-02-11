@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 17:36:36 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 21:33:26 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 14:33:33 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static void	sub_msh(t_msh **msh, char *sep_cmd, char **full_cmd)
 	else
 		new_cmd = ft_strdup(sep_cmd);
 	cmds = ft_strsplit(new_cmd, ' ');
-	if ((cmds[0][0] == '\''  && cmds[0][ft_strlen(cmds[0]) - 1] == '\'')|| (cmds[0][0] == '\"'
-		&& cmds[0][ft_strlen(cmds[0]) - 1] == '\"'))
+	if ((cmds[0][0] == '\'' && cmds[0][ft_strlen(cmds[0]) - 1] == '\'')
+		|| (cmds[0][0] == '\"' && cmds[0][ft_strlen(cmds[0]) - 1] == '\"'))
 		cmds[0] = ft_strsubfree(cmds[0], 1, ft_strlen(cmds[0]) - 2);
 	if (select_cmd(cmds[0], *msh) == 1)
 	{
