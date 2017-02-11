@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 17:36:47 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 16:31:53 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 19:25:29 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,13 @@ static void			cd_files(char *str, t_msh **msh)
 	char	*path;
 
 	path = NULL;
-	path = ft_strjoin((*msh)->pwd, "/");
+	if (ft_strcmp((*msh)->pwd, "/") != 0)
+		path = ft_strjoin((*msh)->pwd, "/");
+	else
+		path = ft_strdup("/");
 	path = ft_strjoini(path, str, 1);
+	if (path[ft_strlen(path) - 1] == '/')
+		path = ft_strsubfree(path, 0, ft_strlen(path) - 2);
 	if (check_file(path, str) == 0)
 	{
 		modif_env("OLDPWD", (*msh)->pwd, msh);
