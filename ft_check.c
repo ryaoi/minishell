@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 19:03:12 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/01/29 16:46:13 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 14:43:36 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,26 @@ int				check_directory(char *path)
 	else if (!(S_ISDIR(fs.st_mode)))
 		return ((ft_printf("cd : not a directory: %s\n", path)));
 	return (0);
+}
+
+void			check_space(char **cmds)
+{
+	char		*str;
+
+	str = NULL;
+	if (cmds[0][0] == '\"' || cmds[0][0] == '\'')
+	{
+		if (cmds[0][0] == '\"')
+			str = inspectquotezero(cmds, '\"');
+		if (cmds[0][0] == '\'')
+			str = inspectquotezero(cmds, '\'');
+		if (ft_strchr(str, ' ') != NULL)
+		{
+			ft_printf("minishell: %s: command not found\n", str);
+			ft_strdel(&str);
+			freecmds(cmds);
+			exit(0);
+		}
+		ft_strdel(&str);
+	}
 }

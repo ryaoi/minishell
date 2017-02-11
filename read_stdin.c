@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 20:24:30 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 21:33:15 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/11 14:42:41 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,23 +103,4 @@ void		print_echo(char **cmds, t_msh *msh)
 		i++;
 		print_space(cmds[i]);
 	}
-}
-
-void		check_space(char **cmds)
-{
-	char	*str;
-
-	str = NULL;
-	if (cmds[0][0] == '\"')
-		str = inspectquotezero(cmds, '\"');
-	if (cmds[0][0] == '\'')
-		str = inspectquotezero(cmds, '\'');
-	if (ft_strchr(str, ' ') != NULL)
-	{
-		ft_printf("minishell: %s: command not found\n", str);
-		ft_strdel(&str);
-		freecmds(cmds);
-		exit(0);
-	}
-	ft_strdel(&str);
 }
