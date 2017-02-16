@@ -14,7 +14,7 @@
 
 static void		free_path(t_msh **msh)
 {
-	free((*msh)->bin_dir);
+	freecmds((*msh)->bin_dir);
 	(*msh)->bin_dir = ft_strsplit(":::", ':');
 }
 
