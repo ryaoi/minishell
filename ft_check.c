@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 19:03:12 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 16:15:07 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/16 22:34:36 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int				check_file(char *path, char *file)
 		return ((ft_printf("cd : No such file or directory: %s\n", file)));
 	else if ((fs.st_mode & S_IXUSR) == 0 && (S_ISDIR(fs.st_mode)))
 		return ((ft_printf("cd : Permission denied %s\n", file)));
-	else if (!(S_ISDIR(fs.st_mode)))
+	else if (!(S_ISDIR(fs.st_mode)) && !(S_ISLNK(fs.st_mode)))
 		return ((ft_printf("cd : not a directory: %s\n", file)));
 	return (0);
 }
@@ -35,7 +35,7 @@ int				check_directory(char *path)
 		return ((ft_printf("cd : No such file or directory: %s\n", path)));
 	else if ((fs.st_mode & S_IXUSR) == 0 && (S_ISDIR(fs.st_mode)))
 		return ((ft_printf("cd : Permission denied %s\n", path)));
-	else if (!(S_ISDIR(fs.st_mode)))
+	else if (!(S_ISDIR(fs.st_mode)) && !(S_ISLNK(fs.st_mode)))
 		return ((ft_printf("cd : not a directory: %s\n", path)));
 	return (0);
 }
