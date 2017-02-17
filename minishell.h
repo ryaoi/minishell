@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/16 22:12:36 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/17 01:53:19 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ void				check_single(char **str);
 void				check_space(char **cmds);
 int					stronly(char *str, char c);
 void				check_linked(char **str, t_msh *msh);
+int					check_quote(char *str);
 
 #endif

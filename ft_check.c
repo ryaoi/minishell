@@ -6,11 +6,28 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 19:03:12 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/16 22:34:36 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/17 01:54:59 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int				check_quote(char *str)
+{
+	char		*tmp;
+
+	if (str[0] == '\"' || str[0] == '\'')
+		tmp = ft_strsub(str, 1, ft_strlen(str) - 2);
+	else
+		tmp = ft_strdup(str);
+	if (stronly(tmp, ' ') == 1)
+	{
+		ft_strdel(&tmp);
+		return (0);
+	}
+	ft_strdel(&tmp);
+	return (1);
+}
 
 int				check_file(char *path, char *file)
 {

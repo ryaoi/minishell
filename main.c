@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 17:36:36 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 19:26:57 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/17 01:54:22 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,13 @@ void		exec_msh(t_msh **msh, char *line, char **sep_cmd)
 		if (ret)
 		{
 			(*msh)->process = 1;
+			ft_printf("test: line:%s\n", line);
 			sep_cmd = ft_strsplit(line, ';');
 			free(line);
 			while (sep_cmd[i] != 0)
 			{
-				sub_msh(msh, sep_cmd[i], sep_cmd);
+				if (check_quote(sep_cmd[i]) == 1)
+					sub_msh(msh, sep_cmd[i], sep_cmd);
 				i++;
 			}
 			freecmds(sep_cmd);
