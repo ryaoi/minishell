@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 17:36:36 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/17 01:57:11 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/17 05:54:38 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	intro(void)
 	ft_putstr(RESET);
 }
 
-static void	use_bin(char **cmds, t_msh **msh)
+void		use_bin(char **cmds, t_msh **msh)
 {
 	int		pid;
 

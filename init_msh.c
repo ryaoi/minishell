@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 19:45:02 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 18:54:54 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/17 04:47:36 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void		init_pwd(t_msh **msh, char **envp)
 			(*msh)->pwd = ft_strsub(envp[i], 4, ft_strlen(envp[i]));
 		if (ft_strncmp("HOME", envp[i], 4) == 0)
 			(*msh)->home = ft_strsub(envp[i], 5, ft_strlen(envp[i]));
+		if (ft_strncmp("OLDPWD", envp[i], 6) == 0)
+			(*msh)->opwd = ft_strsub(envp[i], 7, ft_strlen(envp[i]));
 		i++;
 	}
 }
@@ -55,12 +57,22 @@ static void		add_env(t_env **head, char *str)
 static void		init_env(t_msh **msh, char **envp)
 {
 	int			i;
+	char		*shlvl;
+	int			tmp;
+	char		**stock;
 
 	i = 0;
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "SHLVL", 5) == 0)
-			add_env(&((*msh)->env), "SHLVL=2");
+		{
+			stock = ft_strsplit(envp[i], '=');
+			tmp = ft_atoi(stock[1]) + 1;
+			shlvl = ft_strjoini("SHLVL=", ft_itoa(tmp), 2);
+			add_env(&((*msh)->env), shlvl);
+			freecmds(stock);
+			ft_strdel(&shlvl);
+		}
 		else
 			add_env(&((*msh)->env), envp[i]);
 		i++;

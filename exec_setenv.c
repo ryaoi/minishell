@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 18:27:28 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 16:58:28 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/17 06:00:25 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		all_cap(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
+		if ((str[i] >= 'A' && str[i] <= 'Z') || str[i] == '_')
 			i++;
 		else
 			return (1);
@@ -43,6 +43,11 @@ static int		check_cmds(char **cmds)
 		return (ft_printf("Missing the value of the variable\n"));
 	else if (all_cap(cmds[1]))
 		return (ft_printf("The name of the variable shoud be capitalized\n"));
+	else if (stronly(cmds[1], '_') == 1)
+	{
+		ft_putstr("The name of the variable");
+		return (ft_printf(" should contain a letter\n"));
+	}
 	return (0);
 }
 

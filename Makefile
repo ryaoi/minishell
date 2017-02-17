@@ -6,7 +6,7 @@
 #    By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/30 16:48:59 by ryaoi             #+#    #+#              #
-#    Updated: 2017/02/11 14:34:09 by ryaoi            ###   ########.fr        #
+#    Updated: 2017/02/17 03:25:32 by ryaoi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRC		= additional_env.c \
 		  ft_straddonei.c \
 		  init_term.c \
 		  handle_signal.c \
-		  getquotezero.c
+		  getquotezero.c \
+		  env_pwdopwd.c
 
 OBJ		= $(SRC:.c=.o)
 

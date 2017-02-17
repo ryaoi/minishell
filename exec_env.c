@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 20:40:37 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 16:31:39 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/17 05:57:36 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,13 @@ void			print_doubledot(char *str, t_msh *msh, int i, int j)
 	free(str);
 }
 
-static void		modify_cmds(char *str, t_msh *msh)
+static void		modify_cmds(char **cmds, t_msh *msh)
 {
 	t_env		*ptr;
 	char		*name;
+	char		**bin_tab;
 
-	name = ft_strsub(str, 1, ft_strlen(str) - 1);
+	name = ft_strsub(cmds[1], 1, ft_strlen(cmds[1]) - 1);
 	name = ft_strjoini("/", name, 2);
 	ptr = msh->env;
 	while (ptr != NULL)
@@ -79,8 +80,10 @@ static void		modify_cmds(char *str, t_msh *msh)
 		}
 		ptr = ptr->next;
 	}
-	printall_env(msh);
 	ft_strdel(&name);
+	bin_tab = rm_first(cmds);
+	use_bin(bin_tab, &msh);
+	freecmds(bin_tab);
 }
 
 void			exec_env(char **cmds, t_msh *msh)
@@ -108,5 +111,5 @@ void			exec_env(char **cmds, t_msh *msh)
 		}
 	}
 	else
-		modify_cmds(cmds[1], msh);
+		modify_cmds(cmds, msh);
 }

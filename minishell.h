@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/17 01:53:19 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/17 05:54:36 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct		s_msh
 	char			**bin_dir;
 	char			*pwd;
 	char			*home;
+	char			*opwd;
 	int				process;
 }					t_msh;
 
@@ -91,5 +92,9 @@ void				check_space(char **cmds);
 int					stronly(char *str, char c);
 void				check_linked(char **str, t_msh *msh);
 int					check_quote(char *str);
+void				env_pwdopwd(char *pwd, char *opwd, t_msh **msh);
+void				swap_pwdopwd(t_msh **msh);
+char				**rm_first(char **cmds);
+void				use_bin(char **cmds, t_msh **msh);
 
 #endif
