@@ -35,11 +35,20 @@ int				check_file(char *path, char *file)
 
 	lstat(path, &fs);
 	if (access(path, F_OK) != 0)
-		return ((ft_printf("cd : No such file or directory: %s\n", file)));
+	{
+		ft_putstr("minishell: ");
+		return ((ft_printf("cd: %s: No such file or directory\n", file)));
+	}
 	else if ((fs.st_mode & S_IXUSR) == 0 && (S_ISDIR(fs.st_mode)))
-		return ((ft_printf("cd : Permission denied %s\n", file)));
+	{
+		ft_putstr("minishell: ");
+		return ((ft_printf("cd: %s: Permission denied\n", file)));
+	}
 	else if (!(S_ISDIR(fs.st_mode)) && !(S_ISLNK(fs.st_mode)))
-		return ((ft_printf("cd : not a directory: %s\n", file)));
+	{
+		ft_putstr("minishell: ");
+		return ((ft_printf("cd: %s: Not a directory\n", file)));
+	}
 	return (0);
 }
 
@@ -49,11 +58,20 @@ int				check_directory(char *path)
 
 	lstat(path, &fs);
 	if (access(path, F_OK) != 0)
-		return ((ft_printf("cd : No such file or directory: %s\n", path)));
+	{
+		ft_putstr("minishell: ");
+		return ((ft_printf("cd: %s: No such file or directory\n", path)));
+	}
 	else if ((fs.st_mode & S_IXUSR) == 0 && (S_ISDIR(fs.st_mode)))
-		return ((ft_printf("cd : Permission denied %s\n", path)));
+	{
+		ft_putstr("minishell: ");
+		return ((ft_printf("cd: %s: Permission denied\n", path)));
+	}
 	else if (!(S_ISDIR(fs.st_mode)) && !(S_ISLNK(fs.st_mode)))
-		return ((ft_printf("cd : not a directory: %s\n", path)));
+	{
+		ft_putstr("minishell ");
+		return ((ft_printf("cd: %s: Not a directory\n", path)));
+	}
 	return (0);
 }
 

@@ -15,8 +15,12 @@
 static void		init_pwd(t_msh **msh, char **envp)
 {
 	int			i;
+	char		cwd[1024];
 
 	i = 0;
+	(*msh)->pwd = NULL;
+	(*msh)->home = NULL;
+	(*msh)->opwd = NULL;
 	while (envp[i] != 0)
 	{
 		if (ft_strncmp("PWD", envp[i], 3) == 0)
@@ -27,6 +31,12 @@ static void		init_pwd(t_msh **msh, char **envp)
 			(*msh)->opwd = ft_strsub(envp[i], 7, ft_strlen(envp[i]));
 		i++;
 	}
+	if ((*msh)->pwd == NULL)
+		(*msh)->pwd = ft_strdup(getcwd(cwd, sizeof(cwd)));
+	if ((*msh)->home == NULL)
+		(*msh)->home = ft_strdup("/");
+	if ((*msh)->opwd == NULL)
+		(*msh)->opwd = ft_strdup("/");
 }
 
 static void		add_env(t_env **head, char *str)
@@ -83,8 +93,13 @@ static void		init_bin_dir(t_msh **msh, char **envp)
 {
 	char		*str;
 
-	while (ft_strncmp(*envp, "PATH=", 5) != 0)
+	while (*envp && ft_strncmp(*envp, "PATH=", 5) != 0)
 		envp++;
+	if (*envp == 0)
+	{
+		(*msh)->bin_dir = ft_strsplit(":::", ':');
+		return ;
+	}
 	str = ft_strsub(*envp, 5, ft_strlen(*envp));
 	(*msh)->bin_dir = ft_strsplit(str, ':');
 	ft_strdel(&str);
@@ -108,5 +123,5 @@ void			init_msh(t_msh **msh, char **envp)
 	init_env(msh, envp);
 	init_bin_dir(msh, envp);
 	init_pwd(msh, envp);
-	replace_envdata("SHELL", get_data("PWD", (*msh)->env), msh, 0);
+	replace_envdata("SHELL", (*msh)->pwd, msh, 0);
 }
