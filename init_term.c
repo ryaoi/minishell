@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/05 20:15:17 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 17:35:06 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/18 17:24:28 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ void			clrterm(void)
 
 int				init_term(t_msh *msh)
 {
-	if ((tgetent(NULL, getenv("TERM")) != 1))
+	char		*term;
+
+	if (!(term = getenv("TERM")))
+		term = "xterm-256color";
+	if ((tgetent(NULL, term) != 1))
 		return (0);
 	tcgetattr(0, &msh->term);
 	msh->term.c_cc[VMIN] = 1;
