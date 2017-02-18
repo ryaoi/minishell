@@ -96,5 +96,6 @@ void				env_pwdopwd(char *pwd, char *opwd, t_msh **msh);
 void				swap_pwdopwd(t_msh **msh);
 char				**rm_first(char **cmds);
 void				use_bin(char **cmds, t_msh **msh);
+int					quotenspace(char *str);
 
 #endif

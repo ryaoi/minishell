@@ -59,3 +59,23 @@ char			**rm_first(char **cmds)
 	ret_tab[i - 1] = 0;
 	return (ret_tab);
 }
+
+int				quotenspace(char *str)
+{
+	int			i;
+	int			total;
+
+	i = 0;
+	total = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+			total++;
+		if (str[i] != ' ' && str[i] != '\'' && str[i] != '\"')
+			return (1);
+		i++;
+	}
+	if (total == 2)
+		return (1);
+	return (0);
+}

@@ -65,7 +65,8 @@ int			read_stdin(char **line)
 	}
 	*line = ft_strdup(str);
 	ft_strdel(&str);
-	if ((*buf == '\n' && flag == 0) || stronly(*line, ' ') == 1)
+	if ((*buf == '\n' && flag == 0) || stronly(*line, ' ') == 1
+		|| (quotenspace(*line) == 0))
 	{
 		ft_strdel(line);
 		return (0);

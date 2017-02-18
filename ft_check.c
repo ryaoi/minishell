@@ -22,6 +22,7 @@ int				check_quote(char *str)
 		tmp = ft_strdup(str);
 	if (stronly(tmp, ' ') == 1)
 	{
+		ft_printf("minishell: %s: command not found\n", tmp);
 		ft_strdel(&tmp);
 		return (0);
 	}
