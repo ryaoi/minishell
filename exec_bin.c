@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 18:26:08 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/17 05:50:34 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/18 19:37:47 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,15 @@ static void			freeall(char **envp, char *stock, char *str)
 	exit(0);
 }
 
-static void			cmd_notfound(char **envp, char *stock)
+static void			cmd_notfound(char **envp, char *stock, int perm)
 {
 	struct stat		fs;
 
 	lstat(stock + 1, &fs);
 	freecmds(envp);
-	if (S_ISDIR(fs.st_mode))
+	if (perm == -1)
+		ft_printf("minishell: %s: Permission denied\n", (stock + 1));
+	else if (S_ISDIR(fs.st_mode))
 		ft_printf("minishell: %s: is a directory\n", (stock + 1));
 	else if (ft_strchr(stock + 1, '/') == NULL)
 		ft_printf("minishell: %s: command not found\n", (stock + 1));
@@ -68,10 +70,12 @@ static void			cmd_notfound(char **envp, char *stock)
 void				exec_dir_bin(char **cmds, t_msh *msh, char **envp)
 {
 	int		i;
+	int		perm;
 	char	*tmp;
 	char	*verif;
 
 	i = 0;
+	perm = 0;
 	tmp = ft_strdup(ft_strrchr(cmds[0], '/'));
 	while ((msh->bin_dir)[i] != 0)
 	{
@@ -80,17 +84,18 @@ void				exec_dir_bin(char **cmds, t_msh *msh, char **envp)
 		{
 			free(cmds[0]);
 			cmds[0] = ft_strdup(verif);
-			if (execve(verif, &cmds[0], envp) > 0)
+			check_perm(verif, &perm);
+			if (perm == 1 && execve(verif, &cmds[0], envp) > 0)
 				freeall(cmds, tmp, verif);
 		}
 		ft_strdel(&verif);
 		i++;
 	}
 	ft_strdel(&tmp);
-	cmd_notfound(envp, cmds[0]);
+	cmd_dir_notfound(envp, cmds[0], perm);
 }
 
-void				exec_bin(char **cmds, t_msh *msh)
+void				exec_bin(char **cmds, t_msh *msh, int perm)
 {
 	int		i;
 	char	*str;
@@ -109,10 +114,11 @@ void				exec_bin(char **cmds, t_msh *msh)
 		str = ft_strjoin((msh->bin_dir)[i], stock);
 		free(cmds[0]);
 		cmds[0] = ft_strdup(str);
-		if (execve(str, &cmds[0], envp) > 0)
+		check_perm(str, &perm);
+		if (perm == 1 && execve(str, &cmds[0], envp) > 0)
 			freeall(cmds, stock, str);
 		i++;
 		ft_strdel(&str);
 	}
-	cmd_notfound(envp, stock);
+	cmd_notfound(envp, stock, perm);
 }

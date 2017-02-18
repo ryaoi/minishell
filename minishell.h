@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/17 05:54:36 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/18 19:35:32 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char				*inspectquote(char **cmds, char c);
 char				*inspectquotetwo(char **cmds, char c);
 char				*inspectquotezero(char **cmds, char c);
 void				print_doubledot(char *str, t_msh *msh, int i, int j);
-void				exec_bin(char **cmds, t_msh *msh);
+void				exec_bin(char **cmds, t_msh *msh, int perm);
 void				env_string_err(char *str, t_msh *msh);
 int					env_error(char *str);
 char				*envtostr(char *str, int i, t_msh **msh);
@@ -87,15 +87,16 @@ int					reset_term(t_msh *msh);
 void				handle_signal(t_msh *msh);
 void				clrterm(void);
 void				print_echo(char **cmds, t_msh *msh);
-void				check_single(char **str);
 void				check_space(char **cmds);
 int					stronly(char *str, char c);
 void				check_linked(char **str, t_msh *msh);
+void				cmd_dir_notfound(char**envp, char *stock, int perm);
 int					check_quote(char *str);
 void				env_pwdopwd(char *pwd, char *opwd, t_msh **msh);
 void				swap_pwdopwd(t_msh **msh);
 char				**rm_first(char **cmds);
 void				use_bin(char **cmds, t_msh **msh);
 int					quotenspace(char *str);
+int					check_perm(char *str, int *ret);
 
 #endif

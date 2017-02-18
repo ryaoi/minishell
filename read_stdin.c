@@ -6,52 +6,18 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 20:24:30 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/17 01:53:05 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/18 19:37:49 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	count_char(char *str, char c)
+int				read_stdin(char **line)
 {
-	int		i;
-	int		ret;
-
-	i = 0;
-	ret = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			ret++;
-		i++;
-	}
-	return (ret);
-}
-
-void		check_single(char **str)
-{
-	char	*stock;
-
-	stock = ft_strdup(*str);
-	if (ft_strcmp(*str, "\"") == 0 || count_char(*str, '\"') == 1)
-	{
-		ft_strdel(str);
-		*str = ft_strjoin(stock, "\"");
-	}
-	else if (ft_strcmp(*str, "\'") == 0 || count_char(*str, '\'') == 1)
-	{
-		ft_strdel(str);
-		*str = ft_strjoin(stock, "\'");
-	}
-	ft_strdel(&stock);
-}
-
-int			read_stdin(char **line)
-{
-	int		ret;
-	char	buf[1];
-	char	*str;
-	int		flag;
+	int			ret;
+	char		buf[1];
+	char		*str;
+	int			flag;
 
 	flag = 0;
 	ret = 0;
@@ -74,16 +40,16 @@ int			read_stdin(char **line)
 	return (ret);
 }
 
-static void	print_space(char *str)
+static void		print_space(char *str)
 {
 	if (str != NULL)
 		ft_putchar(' ');
 }
 
-void		print_echo(char **cmds, t_msh *msh)
+void			print_echo(char **cmds, t_msh *msh)
 {
-	int		i;
-	char	*str;
+	int			i;
+	char		*str;
 
 	i = 1;
 	while (cmds[i] != 0)
@@ -107,4 +73,40 @@ void		print_echo(char **cmds, t_msh *msh)
 		i++;
 		print_space(cmds[i]);
 	}
+}
+
+int				check_perm(char *str, int *ret)
+{
+	if (access(str, F_OK) == 0)
+	{
+		if (access(str, X_OK) == 0)
+		{
+			*ret = 1;
+			return (1);
+		}
+		else
+		{
+			*ret = -1;
+			return (1);
+		}
+	}
+	return (0);
+}
+
+void			cmd_dir_notfound(char **envp, char *stock, int perm)
+{
+	struct stat	fs;
+
+	lstat(stock, &fs);
+	freecmds(envp);
+	if (perm == -1)
+		ft_printf("minishell: %s: Permission denied\n", stock);
+	else if (S_ISDIR(fs.st_mode))
+		ft_printf("minishell: %s: is a directory\n", stock);
+	else if (ft_strchr(stock + 1, '/') == NULL)
+		ft_printf("minishell: %s: command not found\n", stock);
+	else if (stock[0] != '$')
+		ft_printf("minishell: %s: No such file or directory\n", stock);
+	ft_strdel(&stock);
+	exit(0);
 }
