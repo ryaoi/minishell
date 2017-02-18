@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 17:36:36 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/18 20:04:06 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/18 20:05:51 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void		exec_msh(t_msh **msh, char *line, char **sep_cmd)
 		ret = read_stdin(&line);
 		if (ret)
 		{
-			ft_printf("line is:%s\n", line);
 			(*msh)->process = 1;
 			sep_cmd = ft_strsplit(line, ';');
 			free(line);
