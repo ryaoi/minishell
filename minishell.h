@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/18 19:35:32 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/18 19:57:30 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ char				**rm_first(char **cmds);
 void				use_bin(char **cmds, t_msh **msh);
 int					quotenspace(char *str);
 int					check_perm(char *str, int *ret);
+void				adjust_quote(char **str, int dq, int q, int i);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 03:18:37 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/17 05:58:53 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/18 19:56:50 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,30 @@ int				quotenspace(char *str)
 	if (total == 2)
 		return (1);
 	return (0);
+}
+
+void			adjust_quote(char **str, int dq, int q, int i)
+{
+	char		*tmp;
+
+	tmp = ft_strdup(*str);
+	while (tmp[i] != '\0')
+	{
+		if (tmp[i] == '\'')
+			q++;
+		if (tmp[i] == '\"')
+			dq++;
+		i++;
+	}
+	if (dq % 2 != 0)
+	{
+		ft_strdel(str);
+		*str = ft_strjoin(tmp, "\"");
+	}
+	if (q % 2 != 0)
+	{
+		ft_strdel(str);
+		*str = ft_strjoin(tmp, "\'");
+	}
+	ft_strdel(&tmp);
 }
