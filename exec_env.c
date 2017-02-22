@@ -6,13 +6,13 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 20:40:37 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/17 05:57:36 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/22 03:49:58 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		printall_env(t_msh *msh)
+void			printall_env(t_msh *msh)
 {
 	t_env		*ptr;
 
@@ -90,8 +90,8 @@ void			exec_env(char **cmds, t_msh *msh)
 {
 	char		*str;
 
-	if (cmds[1] == NULL)
-		printall_env(msh);
+	if (parse_env(cmds, msh))
+		return ;
 	else if (cmds[1][0] == '\'')
 	{
 		str = inspectquote(cmds, '\'');

@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:59:38 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/22 02:19:06 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/22 03:51:42 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,20 @@ void		cdminus(char *pwd, t_msh *msh)
 	else
 		ft_putstr(pwd);
 	ft_putstr("\n");
+}
+
+int			parse_env(char **cmds, t_msh *msh)
+{
+	char	*ptr;
+
+	if (cmds[1] == NULL)
+	{
+		printall_env(msh);
+		return (1);
+	}
+	else if ((ptr = ft_strchr(cmds[1], '=')))
+		return (ft_printf("Use setenv\n"));
+	else if (ft_strncmp(cmds[1], "--unset", 7) == 0)
+		return (ft_printf("Use unsetenv\n"));
+	return (0);
 }

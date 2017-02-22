@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/22 02:02:59 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/22 03:49:45 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,7 @@ int					quotenspace(char *str);
 int					check_perm(char *str, int *ret);
 void				adjust_quote(char **str, int dq, int q, int i);
 void				cdminus(char *pwd, t_msh *msh);
+int					parse_env(char **cmds, t_msh *msh);
+void				printall_env(t_msh *msh);
 
 #endif
