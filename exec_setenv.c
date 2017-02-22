@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 18:27:28 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/17 06:00:25 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/22 00:51:04 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ static int		check_cmds(char **cmds)
 	}
 	else if (i < 3)
 		return (ft_printf("Missing the value of the variable\n"));
+	else if (ft_strisalpha(cmds[1]))
+	{
+		ft_putstr("The name of the variable");
+		return (ft_printf(" should only contain characters\n"));
+	}
 	else if (all_cap(cmds[1]))
 		return (ft_printf("The name of the variable shoud be capitalized\n"));
 	else if (stronly(cmds[1], '_') == 1)

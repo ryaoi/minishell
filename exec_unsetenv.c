@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 21:24:59 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/11 19:38:19 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/22 00:32:03 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void			exec_unsetenv(char **cmds, t_msh **msh)
 	t_env		*ptr;
 	t_env		*prev;
 
+	if (cmds[1] == NULL)
+		return ;
 	ptr = (*msh)->env;
 	prev = ptr;
 	while (ptr != NULL)

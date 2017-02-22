@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 15:06:25 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/10 20:16:24 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/22 00:48:49 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int					ft_countspace(char *str);
 int					ft_str_is_digit(char *str);
 char				*ft_strerase(char *str, char c);
 char				*ft_strerasef(char *str, char c);
+int					ft_strisalpha(char *str);
 
 typedef	struct		s_list
 {
