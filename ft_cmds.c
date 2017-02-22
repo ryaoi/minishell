@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:59:38 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/22 02:13:19 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/22 02:19:06 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		cdminus(char *pwd, t_msh *msh)
 {
 	char	*ptr;
 
-	if(ft_strncmp(msh->home, pwd, ft_strlen(msh->home)) == 0)
+	if (ft_strncmp(msh->home, pwd, ft_strlen(msh->home)) == 0)
 	{
 		ft_putstr("~");
 		ptr = ft_strsub(pwd, ft_strlen(msh->home), ft_strlen(pwd)
