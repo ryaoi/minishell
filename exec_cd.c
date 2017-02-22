@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 17:36:47 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/18 19:34:32 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/22 02:02:09 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static void			cd_dir(char *str, t_msh **msh)
 	{
 		env_pwdopwd((*msh)->pwd, (*msh)->opwd, msh);
 		swap_pwdopwd(msh);
+		cdminus((*msh)->pwd, *msh);
 		return ;
 	}
 	else if (str[0] == '~' && (get_data("HOME", (*msh)->env) == NULL))
