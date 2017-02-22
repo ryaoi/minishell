@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:56:51 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/22 03:49:45 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/22 22:17:07 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,7 @@ void				adjust_quote(char **str, int dq, int q, int i);
 void				cdminus(char *pwd, t_msh *msh);
 int					parse_env(char **cmds, t_msh *msh);
 void				printall_env(t_msh *msh);
+void				check_wave(char **str, t_msh *msh);
+int					check_onewave(char *str);
 
 #endif

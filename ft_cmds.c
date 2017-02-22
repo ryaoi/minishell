@@ -6,7 +6,7 @@
 /*   By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:59:38 by ryaoi             #+#    #+#             */
-/*   Updated: 2017/02/22 03:51:42 by ryaoi            ###   ########.fr       */
+/*   Updated: 2017/02/22 22:20:10 by ryaoi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,26 @@ int			parse_env(char **cmds, t_msh *msh)
 	else if (ft_strncmp(cmds[1], "--unset", 7) == 0)
 		return (ft_printf("Use unsetenv\n"));
 	return (0);
+}
+
+void		check_wave(char **str, t_msh *msh)
+{
+	char	*tmp;
+	char	*tmp_str;
+
+	if (ft_strcmp(*str, "~") == 0)
+	{
+		ft_strdel(str);
+		*str = ft_strdup(msh->home);
+	}
+	else if ((*str)[0] == '~' && (check_onewave(*str) == 1)
+			&& (*str)[1] == '/')
+	{
+		tmp = ft_strdup(msh->home);
+		tmp_str = ft_strsub(*str, 1, ft_strlen(*str) - 1);
+		ft_strdel(str);
+		*str = ft_strjoin(tmp, tmp_str);
+		ft_strdel(&tmp);
+		ft_strdel(&tmp_str);
+	}
 }
