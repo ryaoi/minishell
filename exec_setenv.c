@@ -36,7 +36,7 @@ static int		check_cmds(char **cmds)
 		i++;
 	if (i < 2)
 	{
-		ft_putstr("Missing the name of the varible");
+		ft_putstr("Missing the name of the variable");
 		return (ft_printf(" and the value of the variable\n"));
 	}
 	else if (i < 3)
