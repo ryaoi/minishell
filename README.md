@@ -1,6 +1,6 @@
 # minishell
 
-##It's basically a shell without termcap
+## It's basically a shell without termcap
 
 `env` `setenv` `unsetenv` `echo` `exit` `cd` are my shell's bullitins.
 You can not use the arrows because this shell is made without termcap.
